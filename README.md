@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 **CPEN 221 / Fall 2015: Machine Problem 3**
 The Graph ADT and Social Networks
 ===
@@ -113,3 +114,7 @@ We will grade your work _approximately_ as follows:
 	+ Github repository to which work was committed;
 	+ An estimate of the number of hours of work to complete this MP;
 	+ A short discussion (<= 100 words) on whether any other methods should be added to the `Graph` interface. Justify why a new method should be added or justify why it is complete as-is.
+=======
+# 2015-L1F-yjamie96
+Student work repository -- Jamie Ye
+>>>>>>> Jamie
