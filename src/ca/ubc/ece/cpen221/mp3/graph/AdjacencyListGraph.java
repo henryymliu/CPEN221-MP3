@@ -1,5 +1,5 @@
 package ca.ubc.ece.cpen221.mp3.graph;
-<<<<<<< HEAD
+
 import java.util.*;
 
 import ca.ubc.ece.cpen221.mp3.staff.Graph;
@@ -92,10 +92,4 @@ public class AdjacencyListGraph implements Graph {
 	public List<Vertex> getVertices(){
 		return new ArrayList<Vertex>(listGraph.keySet());
 	}
-=======
-import ca.ubc.ece.cpen221.mp3.staff.Graph;
 
-public class AdjacencyListGraph implements Graph {
-// TODO: Implement this class
->>>>>>> Jamie
-}
