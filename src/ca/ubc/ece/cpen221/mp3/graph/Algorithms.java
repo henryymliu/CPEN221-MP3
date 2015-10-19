@@ -28,27 +28,38 @@ public class Algorithms {
 		// TODO: Implement this method and others
 		return 0;
 	}
-
+	
+	/**
+	 * Traverses graph using depth-first search algorithm, returning
+	 * list of vertices in order traversed
+	 * @param graph graph of vertices with their edges
+	 * @param v vertex in graph to start traversing on
+	 * @return List of vertices in the order traversed
+	 */
 	public static List<Vertex> DepthFirstSearch(Graph graph, Vertex v) {
-		HashMap<Vertex, Boolean> discoveredVertices = new LinkedHashMap<Vertex, Boolean>();
+		//HashMap<Vertex, Boolean> discoveredVertices = new LinkedHashMap<Vertex, Boolean>();
 		List<Vertex> traversedVertices = new LinkedList<Vertex>();
 		Stack<Vertex> vertexStack = new Stack<Vertex>();
 		vertexStack.push(v);
 
 		while (!vertexStack.isEmpty()) {
 			Vertex n = vertexStack.pop();
-			if (!discoveredVertices.get(v)) {
-				discoveredVertices.put(v, true);
-				for(Vertex neighbour: graph.getDownstreamNeighbors(v)){
+			if (!traversedVertices.contains(n)) {
+				//discoveredVertices.put(n, true);
+				traversedVertices.add(n);
+				for(Vertex neighbour: graph.getDownstreamNeighbors(n)){
 					vertexStack.push(neighbour);
+					
 				}
 			}
 		}
+		/*
 		for(Vertex discovered: discoveredVertices.keySet()){
 			if(discoveredVertices.get(discovered)){
 				traversedVertices.add(discovered);
 			}
 		}
+		*/
 		return new LinkedList<Vertex>(traversedVertices);
 	}
 
