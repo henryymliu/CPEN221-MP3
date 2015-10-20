@@ -111,23 +111,7 @@ public class AdjacencyMatrixGraph implements Graph {
     public List<Vertex> getVertices(){
         return new ArrayList<Vertex>(matrixIndex);
     }
-    
-    public static void main (String[] args){
-    	AdjacencyMatrixGraph G = new AdjacencyMatrixGraph();
-    	Vertex a = new Vertex("a");
-    	Vertex b = new Vertex("b");
-    	Vertex c = new Vertex("c");
-    	Vertex d = new Vertex("d");
-    	Vertex e = new Vertex("e");
-    	G.addVertex(a);
-		G.addVertex(b);
-		G.addVertex(c);
-		G.addVertex(d);
-		G.addVertex(e);
-		G.addEdge(a, b);
-		
-	
-    }
+
     
 
 }
