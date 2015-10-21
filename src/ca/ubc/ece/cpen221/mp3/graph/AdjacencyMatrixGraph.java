@@ -24,8 +24,9 @@ public class AdjacencyMatrixGraph implements Graph {
         matrix.add(new ArrayList<Boolean>());
         matrixIndex.add(v);
         for (ArrayList<Boolean> col: matrix){
-            for (Boolean link: col){
-                link = false;
+            for (int i = 0; i < matrixIndex.size(); i++){
+                col.add(false);
+                System.out.println(col.size());
             }
         }
         
@@ -92,9 +93,9 @@ public class AdjacencyMatrixGraph implements Graph {
     public List<Vertex> getUpstreamNeighbors(Vertex v){
         ArrayList<Vertex> upStream = new ArrayList<Vertex>();
         for ( ArrayList<Boolean> col: matrix ){
-            for (int i = 0; i < matrix.size(); i++){
-                if (matrixIndex.get(i) == v){
-                    upStream.add(matrixIndex.get(i));
+            for (Vertex i: matrixIndex){
+                if (i.equals(v)){
+                    upStream.add(i);
                 }
             }
         }
@@ -110,6 +111,7 @@ public class AdjacencyMatrixGraph implements Graph {
     public List<Vertex> getVertices(){
         return new ArrayList<Vertex>(matrixIndex);
     }
+
     
 
 }
