@@ -34,16 +34,14 @@ public class ListGraphTest {
 		G.addVertex(c);
 		G.addVertex(d);
 		G.addVertex(e);
-	}
-	@Test
-	public void test() {
-		
 		G.addEdge(a, b);
-		List<Vertex> testDownstream = new ArrayList<Vertex>();
-		testDownstream.add(b);
-	
-		assertEquals(testDownstream, G.getDownstreamNeighbors(a));
+		G.addEdge(a, c);
+		G.addEdge(a, e);
+		G.addEdge(e, a);
+		G.addEdge(e, d);
+		G.addEdge(d, a);
 	}
+
 	@Test
 	public void testAddEdge2() {
 		G.addEdge(a, b);

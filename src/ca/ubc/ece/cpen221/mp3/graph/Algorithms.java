@@ -29,42 +29,62 @@ public class Algorithms {
 		// TODO: Implement this method and others
 		return 0;
 	}
-	
+
 	/**
-	 * Traverses graph using depth-first search algorithm, returning
-	 * list of vertices in order traversed
-	 * @param graph graph of vertices with their edges
-	 * @param v vertex in graph to start traversing on
+	 * Traverses graph using depth-first search algorithm, returning set of lists of
+	 * vertices in order traversed, with set containing all possible traversals
+	 * 
+	 * @param graph
+	 *            graph of vertices with their edges
+	 * @param v
+	 *            vertex in graph to start traversing on
 	 * @return List of vertices in the order traversed
 	 */
 	public static Set<List<Vertex>> DepthFirstSearch(Graph graph) {
 		HashMap<Vertex, Boolean> discoveredVertices = new LinkedHashMap<Vertex, Boolean>();
 		List<Vertex> vertices = new ArrayList<Vertex>(graph.getVertices());
-		for(Vertex v: vertices){
+		for (Vertex v : vertices) {
 			discoveredVertices.put(v, false);
 		}
-		Set<List<Vertex>> paths = new HashSet<List<Vertex>>();
-		Stack<Vertex> vertexStack = new Stack<Vertex>();
 		
+		Set<List<Vertex>> paths = new HashSet<List<Vertex>>();
+		//List<Vertex> traversedPath = new LinkedList<Vertex>();
+		Stack<Vertex> vertexStack = new Stack<Vertex>();
 
-		while (!vertexStack.isEmpty()) {
-			Vertex n = vertexStack.pop();
-			if (!discoveredVertices.get(n)) {
-				//discoveredVertices.put(n, true);
-				discoveredVertices.put(n, true);
-				for(Vertex neighbour: graph.getDownstreamNeighbors(n)){
-					vertexStack.push(neighbour);
-					
+		for (Vertex nextV : vertices) {
+			/*
+			 * reset map of discovered vertices and create new path
+			 */
+			for (Vertex v : vertices) {
+				discoveredVertices.put(v, false);
+			}
+			List<Vertex> traversedPath = new LinkedList<Vertex>();
+			
+			
+			vertexStack.push(nextV); //starting value for new path
+			
+			/**
+			 * this is the actual DFS algorithm (non-recursive)
+			 */
+			while (!vertexStack.isEmpty()) {
+				
+				Vertex n = vertexStack.pop();
+				
+				if (!discoveredVertices.get(n)) {
+					// discoveredVertices.put(n, true);
+					discoveredVertices.put(n, true);
+					traversedPath.add(n);
+					for (Vertex neighbour : graph.getDownstreamNeighbors(n)) {
+						vertexStack.push(neighbour);
+
+					}
 				}
 			}
+			
+			paths.add(traversedPath);
+			
 		}
-		/*
-		for(Vertex discovered: discoveredVertices.keySet()){
-			if(discoveredVertices.get(discovered)){
-				traversedVertices.add(discovered);
-			}
-		}
-		*/
+	
 		return new HashSet<List<Vertex>>(paths);
 	}
 
