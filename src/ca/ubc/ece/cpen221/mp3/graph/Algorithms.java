@@ -1,6 +1,7 @@
 package ca.ubc.ece.cpen221.mp3.graph;
 
 import ca.ubc.ece.cpen221.mp3.staff.Graph;
+
 import java.util.*;
 import ca.ubc.ece.cpen221.mp3.staff.Vertex;
 
@@ -36,17 +37,21 @@ public class Algorithms {
 	 * @param v vertex in graph to start traversing on
 	 * @return List of vertices in the order traversed
 	 */
-	public static List<Vertex> DepthFirstSearch(Graph graph, Vertex v) {
-		//HashMap<Vertex, Boolean> discoveredVertices = new LinkedHashMap<Vertex, Boolean>();
-		List<Vertex> traversedVertices = new LinkedList<Vertex>();
+	public static Set<List<Vertex>> DepthFirstSearch(Graph graph) {
+		HashMap<Vertex, Boolean> discoveredVertices = new LinkedHashMap<Vertex, Boolean>();
+		List<Vertex> vertices = new ArrayList<Vertex>(graph.getVertices());
+		for(Vertex v: vertices){
+			discoveredVertices.put(v, false);
+		}
+		Set<List<Vertex>> paths = new HashSet<List<Vertex>>();
 		Stack<Vertex> vertexStack = new Stack<Vertex>();
-		vertexStack.push(v);
+		
 
 		while (!vertexStack.isEmpty()) {
 			Vertex n = vertexStack.pop();
-			if (!traversedVertices.contains(n)) {
+			if (!discoveredVertices.get(n)) {
 				//discoveredVertices.put(n, true);
-				traversedVertices.add(n);
+				discoveredVertices.put(n, true);
 				for(Vertex neighbour: graph.getDownstreamNeighbors(n)){
 					vertexStack.push(neighbour);
 					
@@ -60,7 +65,7 @@ public class Algorithms {
 			}
 		}
 		*/
-		return new LinkedList<Vertex>(traversedVertices);
+		return new HashSet<List<Vertex>>(paths);
 	}
 
 }
