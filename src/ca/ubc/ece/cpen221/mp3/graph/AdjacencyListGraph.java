@@ -7,10 +7,10 @@ import ca.ubc.ece.cpen221.mp3.staff.Vertex;
 
 public class AdjacencyListGraph implements Graph {
 
-	private Map<Vertex, ArrayList<Vertex>> listGraph;
+	private Map<Vertex, Set<Vertex>> listGraph;
 	
 	public AdjacencyListGraph(){
-		listGraph= new HashMap<Vertex, ArrayList<Vertex>>();
+		listGraph= new LinkedHashMap<Vertex, Set<Vertex>>();
 	}
 	
 	/*
@@ -25,7 +25,7 @@ public class AdjacencyListGraph implements Graph {
 	 */
 	public void addVertex(Vertex v){
 		if(!listGraph.containsKey(v)){
-			listGraph.put(v, new ArrayList<Vertex>());
+			listGraph.put(v, new LinkedHashSet<Vertex>());
 		}
 	}
 
