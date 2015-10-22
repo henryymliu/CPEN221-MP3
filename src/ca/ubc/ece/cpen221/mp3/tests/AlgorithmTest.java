@@ -28,11 +28,17 @@ public class AlgorithmTest {
 		G.addVertex(d);
 		G.addVertex(e);
 		G.addEdge(a, b);
+	
 		G.addEdge(a, c);
 		G.addEdge(a, e);
 		G.addEdge(e, a);
 		G.addEdge(e, d);
 		G.addEdge(d, a);
+		
+		/*
+		G.addEdge(b, c);
+		G.addEdge(c, a);
+		*/
 	}
 	
 
