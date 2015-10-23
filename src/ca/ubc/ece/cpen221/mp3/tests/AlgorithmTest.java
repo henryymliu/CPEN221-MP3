@@ -64,7 +64,7 @@ public class AlgorithmTest {
 
         // assertEquals(new HashSet<List<Vertex>>(),
         // Algorithms.DepthFirstSearch(G));
-        assertEquals(new HashSet<List<Vertex>>(), Algorithms.DepthFirstSearch(G));
+        assertEquals(new HashSet<List<Vertex>>(), Algorithms.depthFirstSearch(G));
     }
 
 }

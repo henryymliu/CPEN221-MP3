@@ -32,17 +32,17 @@ public class Algorithms {
         Queue<Vertex> currentQueue = new LinkedList<Vertex>();
         Queue<Vertex> nextQueue = new LinkedList<Vertex>();
         Vertex nextVertex;
-        int depth = 0;
+        int depth = 1;
 
         for (Vertex eachVertex : graph.getDownstreamNeighbors(a)) {
             nextQueue.add(eachVertex);
-            visitedSet.add(eachVertex);
-            System.out.println(eachVertex);
+            //System.out.println(eachVertex);
         }
 
         while (!nextQueue.isEmpty()) {
-            depth++;
+            
             currentQueue = new LinkedList<Vertex>(nextQueue);
+            //empty nextQueue
             while (!nextQueue.isEmpty()) {
                 nextQueue.remove();
             }
@@ -54,17 +54,22 @@ public class Algorithms {
                     //System.out.println("1");
                     return depth;
                 }
-                nextQueue.addAll(graph.getDownstreamNeighbors(nextVertex));
+                
+                //if vertex not traversed, marked as visited, and add its downstream neighbours
                 if (!visitedSet.contains(nextVertex)) {
                     visitedSet.add(nextVertex);
+                    /*
                     if (nextVertex.equals(b)) {
                       //  System.out.println("5");
                         return depth;
                     }
+                    */
+                    nextQueue.addAll(graph.getDownstreamNeighbors(nextVertex));
                 }
                 
             }
-            currentQueue = nextQueue;
+          
+            depth++;
            // System.out.println("6");
         }
         return -1;
@@ -111,7 +116,7 @@ public class Algorithms {
      *            vertex in graph to start traversing on
      * @return List of vertices in the order traversed
      */
-    public static Set<List<Vertex>> DepthFirstSearch(Graph graph) {
+    public static Set<List<Vertex>> depthFirstSearch(Graph graph) {
         HashMap<Vertex, Boolean> discoveredVertices = new LinkedHashMap<Vertex, Boolean>();
         List<Vertex> vertices = new ArrayList<Vertex>(graph.getVertices());
         for (Vertex v : vertices) {
@@ -164,10 +169,10 @@ public class Algorithms {
         List<Vertex> vertexBUpstream = graph.getUpstreamNeighbors(b);
         ArrayList<Vertex> edgeVertex = new ArrayList<Vertex>();
 
-        for (int i = 0; i < vertexAUpstream.size(); i++) {
-            for (int k = 0; k <vertexBUpstream.size(); k++) {
-                if (vertexAUpstream.get(i) == vertexBUpstream.get(k)) {
-                    edgeVertex.add(vertexAUpstream.get(i));
+        for (Vertex i: vertexAUpstream) {
+            for (Vertex k: vertexBUpstream) {
+                if (i.equals(k)) {
+                    edgeVertex.add(i);
                 }
             }
         }
@@ -182,10 +187,10 @@ public class Algorithms {
         
         ArrayList<Vertex> edgeVertex = new ArrayList<Vertex>();
 
-        for (int i = 0; i < vertexADownstream.size(); i++) {
-            for (int k = 0; k < vertexBDownstream.size(); k++) {
-                if (vertexADownstream.get(i) == vertexBDownstream.get(k)) {
-                    edgeVertex.add(vertexADownstream.get(i));
+        for (Vertex i: vertexADownstream) {
+            for (Vertex k: vertexBDownstream) {
+                if (i.equals(k)) {
+                    edgeVertex.add(i);
                 }
             }
         }
