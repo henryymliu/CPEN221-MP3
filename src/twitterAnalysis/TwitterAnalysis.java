@@ -6,6 +6,7 @@ import ca.ubc.ece.cpen221.mp3.graph.*;
 import ca.ubc.ece.cpen221.mp3.staff.*;
 
 public class TwitterAnalysis {
+
 	public static void main(String[] args) {
 		FileInputStream queryStream;
 		FileOutputStream outStream;
@@ -46,16 +47,17 @@ public class TwitterAnalysis {
 			BufferedReader twitterReader = new BufferedReader(new InputStreamReader(twitterStream));
 			String line;
 			while ((line = twitterReader.readLine()) != null) {
-				String[] columns = line.split(" -> ");
+				//line.replaceAll("\\s+", "");
+				String[] columns = line.trim().replaceAll("\\s+", "").split("->");
 				// first column is user 1
 				// second column is user 2
 				Vertex u1 = new Vertex(columns[0]);
 				Vertex u2 = new Vertex(columns[1]);
-
+				//System.out.println(columns[0]+","+columns[1]);
 				g.addVertex(u1);
 				g.addVertex(u2);
 				g.addEdge(u1, u2);
-				System.out.println(line);
+				//System.out.println(line);
 			}
 			twitterReader.close();
 			return g;
@@ -63,7 +65,7 @@ public class TwitterAnalysis {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	/**
 	 * Reads query file and writes the results to an output file.
 	 * 
@@ -78,14 +80,14 @@ public class TwitterAnalysis {
 			BufferedReader queryReader = new BufferedReader(new InputStreamReader(queryStream));
 
 			Set<Set<String>> queries = new LinkedHashSet<Set<String>>();
-			final String commonInfluencers = "commonInfluencers";
-			final String numRetweets = "numRetweets";
 
 			String line;
 
 			while ((line = queryReader.readLine()) != null) {
 				Set<String> query = new LinkedHashSet<String>();
-				String[] columns = line.split(" ");
+				
+				String[] columns = line.trim().replaceAll("\\s+", " ").split(" ");
+		
 				// first column is query
 				// second column is user 1
 				// third column is user 2
@@ -99,41 +101,14 @@ public class TwitterAnalysis {
 				query.add(command);
 
 				// check if query ends with question mark and query is unique
-				if (line.endsWith(" ?") && !queries.contains(query)) {
+				if (line.endsWith("?") && !queries.contains(query)) {
 
 					queries.add(query);
 
 					Vertex u1 = new Vertex(id1);
 					Vertex u2 = new Vertex(id2);
 
-					output.write("query: " + command + " " + id1.toString() + " " + id2.toString());
-					output.newLine();
-					output.write("<result>");
-					output.newLine();
-					
-					//if query is commonI
-					if (command.equals(commonInfluencers)) {
-						List<Vertex> commonFollowers = new LinkedList<Vertex>(
-								Algorithms.commonDownstreamVertices(g, u1, u2));
-						for (Vertex v : commonFollowers) {
-							output.write("\t" + v.toString());
-							output.newLine();
-						}
-					} else if (command.equals(numRetweets)) {
-						int distance = Algorithms.shortestDistance(g, u1, u2);
-						if (distance == -1) {
-							output.write("\t Path not found.");
-						} else {
-							output.write("\t" + distance);
-						}
-						output.newLine();
-					} else {
-						output.write("\t Error: invalid command " + command);
-						output.newLine();
-					}
-					output.write("</result>");
-					output.newLine();
-					output.newLine();
+					printResults(output, g, u1, u2, command);
 
 				}
 
@@ -148,28 +123,48 @@ public class TwitterAnalysis {
 
 	}
 
-	/*
-	 * private static void printResults(FileOutputStream outStream,
-	 * Map<List<Vertex>, String> queries, Graph g) throws IOException {
-	 * BufferedWriter output = new BufferedWriter(new
-	 * OutputStreamWriter(outStream)); Set<List<Vertex>> userIDs = new
-	 * LinkedHashSet<List<Vertex>>(queries.keySet()); final String
-	 * commonInfluencers = "commonInfluencers"; final String numRetweets =
-	 * "numRetweets";
-	 * 
-	 * for (List<Vertex> userPairs : userIDs) { String command =
-	 * queries.get(userPairs); Vertex u1 = userPairs.get(0); Vertex u2 =
-	 * userPairs.get(1); output.write("query: " + command + "" + u1.toString() +
-	 * "" + u2.toString() + "\n"); output.write("<result>\n"); if
-	 * (command.equals(commonInfluencers)) { List<Vertex> commonFollowers = new
-	 * LinkedList<Vertex>(Algorithms.downstreamVertices(g, u1, u2)); for (Vertex
-	 * v : commonFollowers) { output.write("\t" + v.toString() + "\n"); } }
-	 * 
-	 * else if (command.equals(numRetweets)) { int distance =
-	 * Algorithms.shortestDistance(g, u1, u2); output.write("\t" + distance +
-	 * "\n"); } else { output.write("\t Error: invalid command \n" + command); }
-	 * output.write("</result>\n"); }
-	 * 
-	 * output.close(); }
-	 */
+	private static void printResults(BufferedWriter output, Graph g, Vertex u1, Vertex u2, String command) {
+		final String commonInfluencers = "commonInfluencers";
+		final String numRetweets = "numRetweets";
+
+		try {
+			output.write("query: " + command + " " + u1.toString() + " " + u2.toString());
+			output.newLine();
+			output.write("<result>");
+			output.newLine();
+
+			// if query is commonInfluencers
+			if (command.equals(commonInfluencers)) {
+				List<Vertex> commonFollowers = new LinkedList<Vertex>(Algorithms.commonDownstreamVertices(g, u1, u2));
+				for (Vertex v : commonFollowers) {
+					output.write("\t" + v.toString());
+					output.newLine();
+				}
+			}
+
+			// if query is numRetweets
+			else if (command.equals(numRetweets)) {
+				int distance = Algorithms.shortestDistance(g, u1, u2);
+				
+				if (distance == -1) {
+					output.write("\tPath not found.");
+				} else {
+					output.write(""+distance);
+					//System.out.println(distance);
+				}
+
+				output.newLine();
+			} else {
+				output.write("\tError: invalid command " + command);
+				output.newLine();
+			}
+			output.write("</result>");
+			output.newLine();
+			output.newLine();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+
 }

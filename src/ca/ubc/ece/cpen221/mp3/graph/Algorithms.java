@@ -15,11 +15,11 @@ public class Algorithms {
      */
 	
 	/**
-	 * Returns shortest distance between vertices a and b.
+	 * Returns shortest traversal distance between vertices a and b.
 	 * @requires a and b exist in graph
 	 * @param graph graph that has already been generated
 	 * @param a starting vertex
-	 * @param b vertex to find connection to
+	 * @param b vertex to find connection to from a
 	 * @return shortest distance traversed from a to b, -1 if path not found
 	 */
     public static int shortestDistance(Graph graph, Vertex a, Vertex b) {
@@ -37,14 +37,12 @@ public class Algorithms {
         while (!nextQueue.isEmpty()) {
             
             currentQueue = new LinkedList<Vertex>(nextQueue);
-            //empty nextQueue
-            while (!nextQueue.isEmpty()) {
-                nextQueue.remove();
-            }
+            nextQueue = new LinkedList<Vertex>();
+            
             while (!currentQueue.isEmpty()) {
                 nextVertex = currentQueue.poll();
                 
-                System.out.println(nextVertex);
+                //System.out.println(nextVertex);
                 if (nextVertex.equals(b)) {
                     //System.out.println("1");
                     return depth;
@@ -53,12 +51,6 @@ public class Algorithms {
                 //if vertex not traversed, marked as visited, and add its downstream neighbours
                 if (!visitedSet.contains(nextVertex)) {
                     visitedSet.add(nextVertex);
-                    /*
-                    if (nextVertex.equals(b)) {
-                      //  System.out.println("5");
-                        return depth;
-                    }
-                    */
                     nextQueue.addAll(graph.getDownstreamNeighbors(nextVertex));
                 }
                 
@@ -109,7 +101,7 @@ public class Algorithms {
     /**
      * Traverses graph using depth-first search algorithm, returning set of
      * lists of vertices in order traversed, with set containing all possible
-     * traversals
+     * traversals starting from each vertex
      * 
      * @param graph
      *            graph of vertices with their edges
@@ -151,6 +143,14 @@ public class Algorithms {
         return new HashSet<List<Vertex>>(paths);
     }
 
+    /**
+     * Returns common upstream vertices of vertices a and b.
+     * 
+     * @param graph that has been initialized with vertices and edges
+     * @param a vertex in graph
+     * @param b vertex in graph
+     * @return list of vertices that are shared upstream by a and b
+     */
     public static List<Vertex> commonUpstreamVertices(Graph graph, Vertex a, Vertex b) {
  
         List<Vertex> vertexAUpstream = graph.getUpstreamNeighbors(a);
@@ -167,7 +167,15 @@ public class Algorithms {
 
         return edgeVertex;
     }
-
+    
+    /**
+     * Returns common downstream vertices of vertices a and b.
+     * 
+     * @param graph that has been initialized with vertices and edges
+     * @param a vertex in graph
+     * @param b vertex in graph
+     * @return list of vertices that are shared downstream by a and b
+     */
     public static List<Vertex> commonDownstreamVertices(Graph graph, Vertex a, Vertex b) {
 
         List<Vertex> vertexADownstream = graph.getDownstreamNeighbors(a);

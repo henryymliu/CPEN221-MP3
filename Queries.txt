@@ -1,6 +1,6 @@
-commonInfluencers 17919972 42057383 ?
+commonInfluencers 23700532 14580197 ?
 numRetweet 24773177 79366215 ?
 numRetweets 24773177 79366215 ?
 numRetweets 19784567 2729061 ?
 numRetweets 19784567 2729060
-numRetweets 19784567 19784567 ?
+ numRetweets 19784567 19784567 ?
