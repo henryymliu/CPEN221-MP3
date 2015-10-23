@@ -1,11 +1,26 @@
 package twitterAnalysis;
 
-import java.io.*;
-import java.util.*;
-import ca.ubc.ece.cpen221.mp3.graph.*;
-import ca.ubc.ece.cpen221.mp3.staff.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-public class TwitterAnalysis {
+import ca.ubc.ece.cpen221.mp3.graph.AdjacencyListGraph;
+import ca.ubc.ece.cpen221.mp3.graph.Algorithms;
+import ca.ubc.ece.cpen221.mp3.staff.Graph;
+import ca.ubc.ece.cpen221.mp3.staff.Vertex;
+
+public class TwitterAnalysis2 {
 	public static void main(String[] args) {
 		FileInputStream queryStream;
 		FileOutputStream outStream;
@@ -14,31 +29,35 @@ public class TwitterAnalysis {
 		final int ARGS_SIZE = 2;
 		final String twitterFile = "datasets/twitter.txt";
 
-		
+		Map<List<Vertex>, String> queries;
 		if (args.length < ARGS_SIZE) {
 			System.out.println("Not enough input arguments.");
 			return;
 		}
 		String queryFile = args[0];
 		String outFile = args[1];
-	
+
 		try {
-			
+
 			queryStream = new FileInputStream(queryFile);
 			outStream = new FileOutputStream(outFile);
-			
+
 			twitterStream = new FileInputStream(twitterFile);
 
 		} catch (FileNotFoundException e) {
 			System.out.println("One or more files not found. Make sure the file name ends in .txt");
 			return;
 		}
-		long startTime = System.currentTimeMillis();
 		Graph g = readTwitterFile(twitterStream);
-		long stopTime = System.currentTimeMillis();
-		System.out.println("Computation took: " + (stopTime - startTime) + " milliseconds.");
-		parseQuery(queryStream, outStream, g);
-	
+
+		queries = new LinkedHashMap<List<Vertex>, String>(readQuery(queryStream));
+		
+		try {
+			printResults(outStream, queries, g);
+		} catch (IOException e) {
+			System.out.println("IOException when writing to " + outFile);
+			return;
+		}
 
 	}
 
@@ -66,62 +85,32 @@ public class TwitterAnalysis {
 		}
 	}
 
-	private static void parseQuery(FileInputStream queryStream, FileOutputStream outStream, Graph g) {
-
+	private static Map<List<Vertex>, String> readQuery(FileInputStream queryStream) {
 		try {
-			BufferedWriter output = new BufferedWriter(new OutputStreamWriter(outStream));
+			Map<List<Vertex>, String> queries = new LinkedHashMap<List<Vertex>, String>();
 			BufferedReader queryReader = new BufferedReader(new InputStreamReader(queryStream));
-			
-			Set<Set<String>> queries = new LinkedHashSet<Set<String>>();
-			final String commonInfluencers = "commonInfluencers";
-			final String numRetweets = "numRetweets";
-
 			String line;
-
 			while ((line = queryReader.readLine()) != null) {
-				Set<String> query = new LinkedHashSet<String>();
+				List<Vertex> userIDs = new LinkedList<Vertex>();
 				String[] columns = line.split(" ");
 				// first column is query
 				// second column is user 1
 				// third column is user 2
 				// fourth column is question mark
-				
-				String command = columns[0];
-				String id1 = columns[1];
-				String id2 = columns[2];
-				
-				//check if query ends with question mark and query is unique
-				if (columns[4].equals("?") && !queries.contains(query)) {
-					query.add(id1);
-					query.add(id2);
-					query.add(command);
-					queries.add(query);
-					
-					Vertex u1 = new Vertex(id1);
-					Vertex u2 = new Vertex(id2);
-					
-					output.write("query: " + command + "" + id1.toString() + "" + id2.toString() + "\n");
-					output.write("<result>\n");
-					if (command.equals(commonInfluencers)) {
-						List<Vertex> commonFollowers = new LinkedList<Vertex>(
-								Algorithms.downstreamVertices(g, u1, u2));
-						for (Vertex v : commonFollowers) {
-							output.write("\t" + v.toString() + "\n");
-						}
-					} else if (command.equals(numRetweets)) {
-						int distance = Algorithms.shortestDistance(g, u1, u2);
-						output.write("\t" + distance + "\n");
-					} else {
-						output.write("\t Error: invalid command \n" + command);
+				if (columns[4].equals("?")) {
+					userIDs.add(new Vertex(columns[1]));
+					userIDs.add(new Vertex(columns[2]));
+					if(!queries.containsKey(userIDs)){
+						
 					}
-					output.write("</result>\n");
-
+					queries.put(userIDs, columns[0]);
 				}
+				
+				
 
 			}
 			queryReader.close();
-			output.close();
-			// return new LinkedHashMap<List<Vertex>, String>(queries);
+			return new LinkedHashMap<List<Vertex>, String>(queries);
 
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -129,7 +118,6 @@ public class TwitterAnalysis {
 
 	}
 
-	/*
 	private static void printResults(FileOutputStream outStream, Map<List<Vertex>, String> queries, Graph g)
 			throws IOException {
 		BufferedWriter output = new BufferedWriter(new OutputStreamWriter(outStream));
@@ -161,5 +149,5 @@ public class TwitterAnalysis {
 
 		output.close();
 	}
-	*/
+
 }

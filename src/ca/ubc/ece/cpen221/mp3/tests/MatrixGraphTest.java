@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class MatrixGraphTest {
-	AdjacencyListGraph G;
+	AdjacencyMatrixGraph G;
 	Vertex a = new Vertex("a");
 	Vertex b = new Vertex("b");
 	Vertex c = new Vertex("c");
@@ -20,7 +20,7 @@ public class MatrixGraphTest {
 	
 	@Before
 	public void setupGraph(){
-		G = new AdjacencyListGraph();
+		G = new AdjacencyMatrixGraph();
 		G.addVertex(a);
 		G.addVertex(b);
 		G.addVertex(c);
