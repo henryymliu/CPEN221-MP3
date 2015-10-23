@@ -29,7 +29,7 @@ public class AdjacencyMatrixGraph implements Graph {
 		matrixIndex.add(v);
 		for (List<Boolean> col : matrix) {
 			col.add(false);
-			System.out.println(col.size());
+			//System.out.println(col.size());
 		}
 	}
 
@@ -95,11 +95,11 @@ public class AdjacencyMatrixGraph implements Graph {
 		List<Vertex> upStream = new LinkedList<Vertex>();
 		int rowIndex = matrixIndex.indexOf(v);
 		for (int i = 0; i < matrixIndex.size(); i++) {
-				
-				if (matrix.get(i).get(rowIndex)) {
-					upStream.add(matrixIndex.get(i));
-				}
-			
+
+			if (matrix.get(i).get(rowIndex)) {
+				upStream.add(matrixIndex.get(i));
+			}
+
 		}
 		return upStream;
 	}
