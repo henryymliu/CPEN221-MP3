@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+﻿
 **CPEN 221 / Fall 2015: Machine Problem 3**
 The Graph ADT and Social Networks
 ===
@@ -23,17 +23,22 @@ Your goals for this machine problem are to:
 
 #### Graph Implementations
 First, write two classes that implement the `ca.ubc.ece.cpen221.mp3.staff.Graph` interface, which represents a _directed_ graph.
-+ **Adjacency List**: Inside the package `ca.ubc.ece.cpen221.mp3.graph`, implement the `AdjacencyListGraph` class. Your implementation must internally represent the graph as an _adjacency list_. If you are not familiar with the adjacency list representation of graphs, see the Wikipedia page on the adjacency list representation as a reference.
-+ **Adjacency Matrix**: Next, implement the `AdjacencyMatrixGraph` class in the `ca.ubc.ece.cpen221.mp3.graph` package. Your implementation must internally represent the graph as an adjacency matrix. If you are not familiar with the adjacency matrix representation of graphs, see the Wikipedia page on the adjacency matrix representation as a reference.
++ **Adjacency List**: Inside the package `ca.ubc.ece.cpen221.mp3.graph`, implement the `AdjacencyListGraph` class. Your implementation must internally represent the graph as an _adjacency list_. If you are not familiar with the adjacency list representation of graphs, see the [Wikipedia page on the adjacency list representation](https://en.wikipedia.org/wiki/Adjacency_list) as a reference.
++ **Adjacency Matrix**: Next, implement the `AdjacencyMatrixGraph` class in the `ca.ubc.ece.cpen221.mp3.graph` package. Your implementation must internally represent the graph as an adjacency matrix. If you are not familiar with the adjacency matrix representation of graphs, see the [Wikipedia page on the adjacency matrix representation](https://en.wikipedia.org/wiki/Adjacency_matrix) as a reference.
 
 #### Algorithm Implementations
 For this part of the assignment, you will implement algorithms that might be used for social network analysis using your graph implementations. 
 
 Your algorithms must use only the methods provided in the interface, and can not use any features specific to the implementation of `Graph` being used. Your algorithms must work correctly on any correct implementation of a `Graph`, including your `AdjacencyMatrixGraph` and `AdjacencyListGraph`.
 
-+ **Breadth first search (BFS)**: Implement the breadth first search algorithm to traverse a graph.
-+ **Depth first search (DFS)**: Implement the depth first search algorithm to traverse a graph.
-+ **Shortest distance**: Implement a method to find the shortest distance between two vertices in an unweighted graph. In an unweighted graph _G_, given two vertices _s_ and _t_, the shortest distance between the two vertices is the number of edges that would have to be traversed to get to _b_ from _a_. The distance between a vertex and itself is 0. If no path exists from _a_ to _b_ then your method should take appropriate action.
+_All your algorithms must work on directed graphs (digraphs)._
+
++ **Breadth first search (BFS)**: Implement the [breadth first search](https://en.wikipedia.org/wiki/Breadth-first_search) algorithm to traverse a graph.
++ **Depth first search (DFS)**: Implement the [depth first search](https://en.wikipedia.org/wiki/Depth-first_search) algorithm to traverse a graph.
+
+For both BFS and DFS above, you should use traverse the entire graph. You should return a set of lists (`Set<List<Vertex>>`). Each list in the set is a connected component of the graph. The vertices in each list are in the order they were visited by the traversal routines. More specifically, start a BFS or DFS traversal at every possible vertex and each such traversal will produce a list. The set of all these lists is what you want to return.
+
++ **Shortest distance**: Implement a method to find the shortest distance between two vertices in an unweighted graph. In an unweighted graph _G_, given two vertices _s_ and _t_, the shortest distance between the two vertices is the number of edges that would have to be traversed to get to _t_ from _s_. The distance between a vertex and itself is 0. If no path exists from _s_ to _t_ then your method should take appropriate action.
 + **Common upstream vertices**: Given a graph _G_ and two vertices _a_ and _b_ in _G_, your implementation should return a list of all vertices _u_ such that there is an edge from _u_ to _a_ and an edge from _u_ to _b_. If there are no such vertices then your implementation should return an empty list.
 + **Common downstream vertices**: Given a graph _G_ and two vertices _a_ and _b_ in _G_, your implementation should return a list of all vertices _v_ such that there is an edge from _a_ to _v_ and an edge from _b_ to _v_.  
 
@@ -114,7 +119,4 @@ We will grade your work _approximately_ as follows:
 	+ Github repository to which work was committed;
 	+ An estimate of the number of hours of work to complete this MP;
 	+ A short discussion (<= 100 words) on whether any other methods should be added to the `Graph` interface. Justify why a new method should be added or justify why it is complete as-is.
-=======
-# 2015-L1F-yjamie96
-Student work repository -- Jamie Ye
->>>>>>> Jamie
+

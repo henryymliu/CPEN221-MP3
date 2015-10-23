@@ -10,7 +10,7 @@ public class AdjacencyListGraph implements Graph {
 	private Map<Vertex, Set<Vertex>> listGraph;
 	
 	public AdjacencyListGraph(){
-		listGraph= new HashMap<Vertex, Set<Vertex>>();
+		listGraph= new LinkedHashMap<Vertex, Set<Vertex>>();
 	}
 	
 	/*
