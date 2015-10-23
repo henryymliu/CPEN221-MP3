@@ -177,10 +177,11 @@ public class Algorithms {
         List<Vertex> allVertices = graph.getVertices();
         List<Vertex> vertexADownstream = graph.getDownstreamNeighbors(a);
         List<Vertex> vertexBDownstream = graph.getDownstreamNeighbors(b);
+        
         ArrayList<Vertex> edgeVertex = new ArrayList<Vertex>();
 
-        for (int i = 0; i < allVertices.size(); i++) {
-            for (int k = 0; k < allVertices.size(); k++) {
+        for (int i = 0; i < vertexADownstream.size(); i++) {
+            for (int k = 0; k < vertexBDownstream.size(); k++) {
                 if (vertexADownstream.get(i) == vertexBDownstream.get(k)) {
                     edgeVertex.add(vertexADownstream.get(i));
                 }

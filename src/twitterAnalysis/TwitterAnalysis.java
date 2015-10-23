@@ -38,7 +38,7 @@ public class TwitterAnalysis {
 		long stopTime = System.currentTimeMillis();
 		System.out.println("Computation took: " + (stopTime - startTime) + " milliseconds.");
 		parseQuery(queryStream, outStream, g);
-	
+
 
 	}
 
@@ -89,32 +89,41 @@ public class TwitterAnalysis {
 				String command = columns[0];
 				String id1 = columns[1];
 				String id2 = columns[2];
+				query.add(id1);
+				query.add(id2);
+				query.add(command);
 				
 				//check if query ends with question mark and query is unique
-				if (columns[4].equals("?") && !queries.contains(query)) {
-					query.add(id1);
-					query.add(id2);
-					query.add(command);
+				if (columns[3].equals("?") && !queries.contains(query)) {
+					
 					queries.add(query);
 					
 					Vertex u1 = new Vertex(id1);
 					Vertex u2 = new Vertex(id2);
 					
-					output.write("query: " + command + "" + id1.toString() + "" + id2.toString() + "\n");
-					output.write("<result>\n");
+					output.write("query: " + command + " " + id1.toString() + " " + id2.toString());
+					output.newLine();
+					
+					output.write("<result>");
+					output.newLine();
+					
 					if (command.equals(commonInfluencers)) {
 						List<Vertex> commonFollowers = new LinkedList<Vertex>(
 								Algorithms.downstreamVertices(g, u1, u2));
 						for (Vertex v : commonFollowers) {
-							output.write("\t" + v.toString() + "\n");
+							output.write("\t" + v.toString());
+							output.newLine();
 						}
 					} else if (command.equals(numRetweets)) {
 						int distance = Algorithms.shortestDistance(g, u1, u2);
-						output.write("\t" + distance + "\n");
+						output.write("\t" + distance);
+						output.newLine();
 					} else {
-						output.write("\t Error: invalid command \n" + command);
+						output.write("\t Error: invalid command " + command);
+						output.newLine();
 					}
-					output.write("</result>\n");
+					output.write("</result>");
+					output.newLine();
 
 				}
 

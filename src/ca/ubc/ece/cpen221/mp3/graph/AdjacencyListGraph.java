@@ -60,7 +60,7 @@ public class AdjacencyListGraph implements Graph {
 	 * iff v has no downstream neighbors.
 	 */
 	public List<Vertex> getDownstreamNeighbors(Vertex v){
-		return new ArrayList<Vertex>(listGraph.get(v));
+		return new LinkedList<Vertex>(listGraph.get(v));
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class AdjacencyListGraph implements Graph {
 	 * iff v has no upstream neighbors.
 	 */
 	public List<Vertex> getUpstreamNeighbors(Vertex v){
-		List<Vertex> upstreamN = new ArrayList<Vertex>();
+		List<Vertex> upstreamN = new LinkedList<Vertex>();
 		for(Vertex v1:listGraph.keySet()){
 			if(listGraph.get(v1).contains(v)){
 				upstreamN.add(v1);
@@ -90,7 +90,7 @@ public class AdjacencyListGraph implements Graph {
 	 * method should return a list of size 0 iff the graph has no vertices.
 	 */
 	public List<Vertex> getVertices(){
-		return new ArrayList<Vertex>(listGraph.keySet());
+		return new LinkedList<Vertex>(listGraph.keySet());
 	}
 }
 
