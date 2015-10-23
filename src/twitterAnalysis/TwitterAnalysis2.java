@@ -132,7 +132,7 @@ public class TwitterAnalysis2 {
 			output.write("query: " + command + "" + u1.toString() + "" + u2.toString() + "\n");
 			output.write("<result>\n");
 			if (command.equals(commonInfluencers)) {
-				List<Vertex> commonFollowers = new LinkedList<Vertex>(Algorithms.downstreamVertices(g, u1, u2));
+				List<Vertex> commonFollowers = new LinkedList<Vertex>(Algorithms.commonDownstreamVertices(g, u1, u2));
 				for (Vertex v : commonFollowers) {
 					output.write("\t" + v.toString() + "\n");
 				}

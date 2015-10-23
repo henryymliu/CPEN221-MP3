@@ -109,7 +109,7 @@ public class TwitterAnalysis {
 					
 					if (command.equals(commonInfluencers)) {
 						List<Vertex> commonFollowers = new LinkedList<Vertex>(
-								Algorithms.downstreamVertices(g, u1, u2));
+								Algorithms.commonDownstreamVertices(g, u1, u2));
 						for (Vertex v : commonFollowers) {
 							output.write("\t" + v.toString());
 							output.newLine();

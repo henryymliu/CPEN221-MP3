@@ -25,6 +25,8 @@ public class Algorithms {
      * @param b
      * @return
      */
+	
+	//TODO: FIX THIS
     public static int shortestDistance(Graph graph, Vertex a, Vertex b) {
         HashSet<Vertex> visitedSet = new HashSet<Vertex>();
         Queue<Vertex> currentQueue = new LinkedList<Vertex>();
@@ -156,14 +158,14 @@ public class Algorithms {
         return new HashSet<List<Vertex>>(paths);
     }
 
-    public static List<Vertex> upstreamVertices(Graph graph, Vertex a, Vertex b) {
-        List<Vertex> allVertices = graph.getVertices();
+    public static List<Vertex> commonUpstreamVertices(Graph graph, Vertex a, Vertex b) {
+ 
         List<Vertex> vertexAUpstream = graph.getUpstreamNeighbors(a);
         List<Vertex> vertexBUpstream = graph.getUpstreamNeighbors(b);
         ArrayList<Vertex> edgeVertex = new ArrayList<Vertex>();
 
-        for (int i = 0; i < allVertices.size(); i++) {
-            for (int k = 0; k < allVertices.size(); k++) {
+        for (int i = 0; i < vertexAUpstream.size(); i++) {
+            for (int k = 0; k <vertexBUpstream.size(); k++) {
                 if (vertexAUpstream.get(i) == vertexBUpstream.get(k)) {
                     edgeVertex.add(vertexAUpstream.get(i));
                 }
@@ -173,8 +175,8 @@ public class Algorithms {
         return edgeVertex;
     }
 
-    public static List<Vertex> downstreamVertices(Graph graph, Vertex a, Vertex b) {
-        List<Vertex> allVertices = graph.getVertices();
+    public static List<Vertex> commonDownstreamVertices(Graph graph, Vertex a, Vertex b) {
+
         List<Vertex> vertexADownstream = graph.getDownstreamNeighbors(a);
         List<Vertex> vertexBDownstream = graph.getDownstreamNeighbors(b);
         
