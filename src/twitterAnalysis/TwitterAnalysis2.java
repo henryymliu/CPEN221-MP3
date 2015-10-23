@@ -20,7 +20,7 @@ import ca.ubc.ece.cpen221.mp3.graph.Algorithms;
 import ca.ubc.ece.cpen221.mp3.staff.Graph;
 import ca.ubc.ece.cpen221.mp3.staff.Vertex;
 
-public class TwitterAnalysis {
+public class TwitterAnalysis2 {
 	public static void main(String[] args) {
 		FileInputStream queryStream;
 		FileOutputStream outStream;
@@ -85,43 +85,32 @@ public class TwitterAnalysis {
 		}
 	}
 
-	private static void readQuery(FileInputStream queryStream, FileOutputStream outStream, Graph g) {
-		
+	private static Map<List<Vertex>, String> readQuery(FileInputStream queryStream) {
 		try {
-			BufferedWriter output = new BufferedWriter(new OutputStreamWriter(outStream));
-			
+			Map<List<Vertex>, String> queries = new LinkedHashMap<List<Vertex>, String>();
 			BufferedReader queryReader = new BufferedReader(new InputStreamReader(queryStream));
-			Set<List<String>> queries = new LinkedHashSet<List<String>>();
 			String line;
-			
 			while ((line = queryReader.readLine()) != null) {
-				List<String> query = new LinkedList<String>();
+				List<Vertex> userIDs = new LinkedList<Vertex>();
 				String[] columns = line.split(" ");
 				// first column is query
 				// second column is user 1
 				// third column is user 2
 				// fourth column is question mark
-				String command = columns[0];
-				String u1 = columns[1];
-				String u2 = columns[2];
 				if (columns[4].equals("?")) {
-					query.add(u1);
-					query.add(u2);
-					query.add(command);
-					if(!queries.contains(query)){
-						queries.add(query);
-						output.write("query: " + command + "" + u1.toString() + "" + u2.toString() + "\n");
-						output.write("<result>\n");
-						output.write("\t" + u1);
+					userIDs.add(new Vertex(columns[1]));
+					userIDs.add(new Vertex(columns[2]));
+					if(!queries.containsKey(userIDs)){
+						
 					}
-					
+					queries.put(userIDs, columns[0]);
 				}
 				
 				
 
 			}
 			queryReader.close();
-			//return new LinkedHashMap<List<Vertex>, String>(queries);
+			return new LinkedHashMap<List<Vertex>, String>(queries);
 
 		} catch (Exception e) {
 			throw new RuntimeException(e);

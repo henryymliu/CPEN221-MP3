@@ -49,21 +49,21 @@ public class Algorithms {
                 
                 System.out.println(nextVertex);
                 if (nextVertex.equals(b)) {
-                    System.out.println("1");
+                    //System.out.println("1");
                     return depth;
                 }
                 nextQueue.addAll(graph.getDownstreamNeighbors(nextVertex));
                 if (!visitedSet.contains(nextVertex)) {
                     visitedSet.add(nextVertex);
                     if (nextVertex.equals(b)) {
-                        System.out.println("5");
+                      //  System.out.println("5");
                         return depth;
                     }
                 }
                 
             }
             currentQueue = nextQueue;
-            System.out.println("6");
+           // System.out.println("6");
         }
         return -1;
     }

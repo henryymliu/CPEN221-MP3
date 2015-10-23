@@ -2,6 +2,9 @@ package ca.ubc.ece.cpen221.mp3.tests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashSet;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -61,7 +64,7 @@ public class AlgorithmTest {
 
         // assertEquals(new HashSet<List<Vertex>>(),
         // Algorithms.DepthFirstSearch(G));
-        // assertEquals(new HashSet<List<Vertex>>(), Algorithms.breadthFirstSearch(G));
+        assertEquals(new HashSet<List<Vertex>>(), Algorithms.DepthFirstSearch(G));
     }
 
 }
