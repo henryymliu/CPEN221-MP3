@@ -13,20 +13,15 @@ public class Algorithms {
      * Please see the README for the machine problem for a more detailed
      * specification of the behavior of each method that one should implement.
      */
-
-    /**
-     * This is provided as an example to indicate that this method and other
-     * methods should be implemented here.
-     * 
-     * You should write the specs for this and all other methods.
-     * 
-     * @param graph
-     * @param a
-     * @param b
-     * @return
-     */
 	
-	//TODO: FIX THIS
+	/**
+	 * Returns shortest distance between vertices a and b.
+	 * @requires a and b exist in graph
+	 * @param graph graph that has already been generated
+	 * @param a starting vertex
+	 * @param b vertex to find connection to
+	 * @return shortest distance traversed from a to b, -1 if path not found
+	 */
     public static int shortestDistance(Graph graph, Vertex a, Vertex b) {
         HashSet<Vertex> visitedSet = new HashSet<Vertex>();
         Queue<Vertex> currentQueue = new LinkedList<Vertex>();
@@ -74,32 +69,38 @@ public class Algorithms {
         }
         return -1;
     }
-
+    
+    /**
+     * Performs BFS starting from every vertex in a directed graph
+     * 
+     * @param graph graph that already has vertices with edges
+     * @return set of all BFS traversals beginning at each vertex
+     */
     public static HashSet<List<Vertex>> breadthFirstSearch(Graph graph) {
         List<Vertex> allVertices = graph.getVertices();
         Set<List<Vertex>> paths = new HashSet<List<Vertex>>();
-
+        
+        //iterate through all vertices
         for (Vertex nextV : allVertices) {
             Queue<Vertex> vertexQueue = new LinkedList<Vertex>();
-            ArrayList<Vertex> edgeVertex = new ArrayList<Vertex>();
+            ArrayList<Vertex> traversedVertices = new ArrayList<Vertex>();
 
+            //enqueue first vertex
             Vertex currentVertex = nextV;
             vertexQueue.add(currentVertex);
-            edgeVertex.add(currentVertex);
 
             while (!vertexQueue.isEmpty()) {
-                for (int i = 0; i < allVertices.size(); i++) {
-                    if (graph.edgeExists(currentVertex, allVertices.get(i))) {
-                        if (!edgeVertex.contains(allVertices.get(i))) {
-                            vertexQueue.add(allVertices.get(i));
-                            edgeVertex.add(allVertices.get(i));
-                        }
-                    }
-                }
-                vertexQueue.remove();
-                currentVertex = vertexQueue.peek();
+            	currentVertex = vertexQueue.poll();
+            	
+            	//if vertex has not been traversed yet, add it to traversed, 
+            	//and enqueue its downstream vertices
+            	if(!traversedVertices.contains(currentVertex)){
+            		traversedVertices.add(currentVertex);
+            		vertexQueue.addAll(graph.getDownstreamNeighbors(currentVertex));
+            	}
+              
             }
-            paths.add(edgeVertex);
+            paths.add(traversedVertices);
 
         }
         return new HashSet<List<Vertex>>(paths);
@@ -117,23 +118,13 @@ public class Algorithms {
      * @return List of vertices in the order traversed
      */
     public static Set<List<Vertex>> depthFirstSearch(Graph graph) {
-        HashMap<Vertex, Boolean> discoveredVertices = new LinkedHashMap<Vertex, Boolean>();
+       
         List<Vertex> vertices = new ArrayList<Vertex>(graph.getVertices());
-        for (Vertex v : vertices) {
-            discoveredVertices.put(v, false);
-        }
-
         Set<List<Vertex>> paths = new HashSet<List<Vertex>>();
-        // List<Vertex> traversedPath = new LinkedList<Vertex>();
         Stack<Vertex> vertexStack = new Stack<Vertex>();
 
         for (Vertex nextV : vertices) {
-            /*
-             * reset map of discovered vertices and create new path
-             */
-            for (Vertex v : vertices) {
-                discoveredVertices.put(v, false);
-            }
+            
             List<Vertex> traversedPath = new LinkedList<Vertex>();
 
             vertexStack.push(nextV); // starting value for new path
@@ -145,14 +136,11 @@ public class Algorithms {
 
                 Vertex n = vertexStack.pop();
 
-                if (!discoveredVertices.get(n)) {
-                    // discoveredVertices.put(n, true);
-                    discoveredVertices.put(n, true);
+                if (!traversedPath.contains(n)) {
+                 
                     traversedPath.add(n);
-                    for (Vertex neighbour : graph.getDownstreamNeighbors(n)) {
-                        vertexStack.push(neighbour);
-
-                    }
+                    vertexStack.addAll(graph.getDownstreamNeighbors(n));
+                   
                 }
             }
 

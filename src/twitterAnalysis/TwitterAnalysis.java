@@ -63,7 +63,14 @@ public class TwitterAnalysis {
 			throw new RuntimeException(e);
 		}
 	}
-
+	
+	/**
+	 * Reads query file and writes the results to an output file.
+	 * 
+	 * @param queryStream
+	 * @param outStream
+	 * @param g
+	 */
 	private static void parseQuery(FileInputStream queryStream, FileOutputStream outStream, Graph g) {
 
 		try {
@@ -92,7 +99,7 @@ public class TwitterAnalysis {
 				query.add(command);
 
 				// check if query ends with question mark and query is unique
-				if (line.endsWith("?") && !queries.contains(query)) {
+				if (line.endsWith(" ?") && !queries.contains(query)) {
 
 					queries.add(query);
 
@@ -101,10 +108,10 @@ public class TwitterAnalysis {
 
 					output.write("query: " + command + " " + id1.toString() + " " + id2.toString());
 					output.newLine();
-
 					output.write("<result>");
 					output.newLine();
-
+					
+					//if query is commonI
 					if (command.equals(commonInfluencers)) {
 						List<Vertex> commonFollowers = new LinkedList<Vertex>(
 								Algorithms.commonDownstreamVertices(g, u1, u2));
