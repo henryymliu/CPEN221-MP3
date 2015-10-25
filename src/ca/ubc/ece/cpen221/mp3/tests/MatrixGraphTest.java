@@ -1,6 +1,6 @@
 package ca.ubc.ece.cpen221.mp3.tests;
 import ca.ubc.ece.cpen221.mp3.graph.*;
-import ca.ubc.ece.cpen221.mp3.staff.Vertex;
+import ca.ubc.ece.cpen221.mp3.staff.*;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
