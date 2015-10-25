@@ -138,7 +138,7 @@ public class AlgorithmTest {
         M.addEdge(h, i);
         M.addEdge(i, h);
         M.addEdge(h, j);
-        //assertEquals(new HashSet<List<Vertex>>(), Algorithms.breadthFirstSearch(M));
+        // assertEquals(new HashSet<List<Vertex>>(), Algorithms.breadthFirstSearch(M));
     }
 
     @Test
