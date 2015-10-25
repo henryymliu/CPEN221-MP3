@@ -43,7 +43,6 @@ public class AlgorithmTest {
         G1.addVertex(h);
         G1.addVertex(i);
         G1.addVertex(j);
-        
         G1.addEdge(a, a);
         G1.addEdge(a, b);
         G1.addEdge(b, c);
@@ -66,13 +65,13 @@ public class AlgorithmTest {
         M1.addVertex(h);
         M1.addVertex(i);
         M1.addVertex(j);
-        
         M1.addEdge(a, a);
         M1.addEdge(a, b);
         M1.addEdge(b, c);
         M1.addEdge(c, e);
         M1.addEdge(c, f);
         M1.addEdge(d, i);
+        M1.addEdge(e, c);
         M1.addEdge(i, j);
         M1.addEdge(j, e);
         M1.addEdge(j, a);
