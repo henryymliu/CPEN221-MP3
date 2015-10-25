@@ -157,11 +157,13 @@ public class TwitterAnalysis {
 
 			// if query is numRetweets
 			else if (command.equals(numRetweets)) {
-				int distance = Algorithms.shortestDistance(g, u1, u2);
+				//note switch in u1 and u2; this is because tweets go upstream
+				int distance = Algorithms.shortestDistance(g, u2, u1);
 				
 				if (distance == -1) {
 					output.write("\tPath not found.");
 				} else {
+					//implicitly convert distance to string as printing out ints somehow didn't work
 					output.write(""+distance);
 					//System.out.println(distance);
 				}
