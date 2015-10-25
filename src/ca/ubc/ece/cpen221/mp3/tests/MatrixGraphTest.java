@@ -16,6 +16,7 @@ public class MatrixGraphTest {
 	Vertex c = new Vertex("c");
 	Vertex d = new Vertex("d");
 	Vertex e = new Vertex("e");
+	Vertex f = new Vertex("f");
 	
 	@Before
 	public void setupGraph(){
@@ -25,7 +26,9 @@ public class MatrixGraphTest {
 		G.addVertex(c);
 		G.addVertex(d);
 		G.addVertex(e);
+		G.addVertex(f);
 	}
+	
 	@Test
 	public void test() {
 		
@@ -35,8 +38,9 @@ public class MatrixGraphTest {
 	
 		assertEquals(testDownstream, G.getDownstreamNeighbors(a));
 	}
+	
 	@Test
-	public void testAddEdge2() {
+	public void testAddEdge() {
 		G.addEdge(a, b);
 		G.addEdge(a, c);
 		G.addEdge(a, e);
@@ -52,6 +56,7 @@ public class MatrixGraphTest {
 		assertEquals(testDownstreamA, G.getDownstreamNeighbors(a));
 		
 	}
+	
 	@Test
 	public void testUpstream() {
 		G.addEdge(a, b);
