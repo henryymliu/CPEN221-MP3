@@ -13,7 +13,7 @@ public class TwitterAnalysis {
 		FileInputStream twitterStream;
 
 		final int ARGS_SIZE = 2;
-		final String twitterFile = "datasets/twitter.txt";
+		final String twitterFile = "datasets/test1.txt";
 
 		if (args.length < ARGS_SIZE) {
 			System.out.println("Not enough input arguments.");
@@ -67,11 +67,11 @@ public class TwitterAnalysis {
 	}
 
 	/**
-	 * Reads query file and writes the results to an output file.
+	 * Reads query file and parses the queries.
 	 * 
-	 * @param queryStream
-	 * @param outStream
-	 * @param g
+	 * @param queryStream initialized FileInputStream for the query file
+	 * @param outStream initialized FileOutputStream for the output file
+	 * @param g initialized graph with vertices and edges
 	 */
 	private static void parseQuery(FileInputStream queryStream, FileOutputStream outStream, Graph g) {
 
@@ -107,7 +107,7 @@ public class TwitterAnalysis {
 
 					Vertex u1 = new Vertex(id1);
 					Vertex u2 = new Vertex(id2);
-
+					
 					printResults(output, g, u1, u2, command);
 
 				}
@@ -122,17 +122,34 @@ public class TwitterAnalysis {
 		}
 
 	}
-
+	/**
+	 * 
+	 * @param output 
+	 * @param g
+	 * @param u1
+	 * @param u2
+	 * @param command
+	 */
 	private static void printResults(BufferedWriter output, Graph g, Vertex u1, Vertex u2, String command) {
 		final String commonInfluencers = "commonInfluencers";
 		final String numRetweets = "numRetweets";
-
+		List<Vertex> allVertices = new ArrayList<Vertex>(g.getVertices());
+		
 		try {
 			output.write("query: " + command + " " + u1.toString() + " " + u2.toString());
 			output.newLine();
 			output.write("<result>");
 			output.newLine();
-
+			
+			//check if vertices exist in graph
+			if(!allVertices.contains(u1) || !allVertices.contains(u2) ){
+				output.write("ERROR: One or more vertices does not exist in the graph.");
+				output.newLine();
+				output.write("</result>");
+				output.newLine();
+				output.newLine();
+				return;
+			}
 			// if query is commonInfluencers
 			if (command.equals(commonInfluencers)) {
 				List<Vertex> commonFollowers = new LinkedList<Vertex>(Algorithms.commonDownstreamVertices(g, u1, u2));
