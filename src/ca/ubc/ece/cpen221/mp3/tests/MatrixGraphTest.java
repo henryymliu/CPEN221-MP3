@@ -91,7 +91,7 @@ public class MatrixGraphTest {
         List<Vertex> testGetVertices = new ArrayList<Vertex>(Arrays.asList(a,b,c,d,e,f));
         assertEquals(testGetVertices,G.getVertices());
         
-        AdjacencyMatrixGraph empty;
+        Graph empty = new AdjacencyMatrixGraph();
         assertEquals(0,empty.getVertices());
     }
 }

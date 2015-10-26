@@ -13,14 +13,11 @@ public class TwitterAnalysis {
 		FileInputStream twitterStream;
 
 		final int ARGS_SIZE = 2;
-<<<<<<< HEAD
-		final String twitterFile = "datasets/test1.txt";
 
-=======
 		final String twitterFile = "datasets/twitter.txt";
 		
 		//if less than 2 input arguments
->>>>>>> 376de114a59bb2e838a6c534155c1261b9f19cc3
+
 		if (args.length < ARGS_SIZE) {
 			System.out.println("Not enough input arguments.");
 			return;
@@ -81,18 +78,14 @@ public class TwitterAnalysis {
 	/**
 	 * Reads query file and parses the queries.
 	 * 
-<<<<<<< HEAD
-	 * @param queryStream initialized FileInputStream for the query file
-	 * @param outStream initialized FileOutputStream for the output file
-	 * @param g initialized graph with vertices and edges
-=======
+
 	 * @requires querystream, outstream, are successfully initialized
 	 * @requires g to be already generated
 	 * @param queryStream file input stream of query file
 	 * @param outStream file output stream of output file
 	 * @param g
 	 * @effects writes results to output file
->>>>>>> 376de114a59bb2e838a6c534155c1261b9f19cc3
+
 	 */
 	private static void parseQuery(FileInputStream queryStream, FileOutputStream outStream, Graph g) {
 
@@ -146,7 +139,7 @@ public class TwitterAnalysis {
 		}
 
 	}
-<<<<<<< HEAD
+
 	/**
 	 * 
 	 * @param output 
@@ -155,9 +148,7 @@ public class TwitterAnalysis {
 	 * @param u2
 	 * @param command
 	 */
-=======
-	
->>>>>>> 376de114a59bb2e838a6c534155c1261b9f19cc3
+
 	private static void printResults(BufferedWriter output, Graph g, Vertex u1, Vertex u2, String command) {
 		final String commonInfluencers = "commonInfluencers";
 		final String numRetweets = "numRetweets";

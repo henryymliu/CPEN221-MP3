@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ca.ubc.ece.cpen221.mp3.graph.AdjacencyListGraph;
-import ca.ubc.ece.cpen221.mp3.graph.AdjacencyMatrixGraph;
+import ca.ubc.ece.cpen221.mp3.staff.Graph;
 import ca.ubc.ece.cpen221.mp3.staff.Vertex;
 
 public class ListGraphTest {
@@ -83,7 +83,7 @@ public class ListGraphTest {
         List<Vertex> testGetVertices = new ArrayList<Vertex>(Arrays.asList(a,b,c,d,e,f));
         assertEquals(testGetVertices,G.getVertices());
         
-        AdjacencyMatrixGraph empty;
+        Graph empty = new AdjacencyListGraph();
         assertEquals(0,empty.getVertices());
     }
 }
