@@ -122,7 +122,7 @@ public class TwitterAnalysis {
 				//this also handles duplicate user ids with different commands
 				Set<String> query = new LinkedHashSet<String>();
 				
-				//a bit overkill, but eliminate any unnecessary whitespace if needed
+				//a bit overkill, but eliminate any unnecessary whitespace if needed and replaces with single space
 				String[] columns = line.trim().replaceAll("\\s+", " ").split(" ");
 		
 				// first column is query
@@ -160,17 +160,22 @@ public class TwitterAnalysis {
 	}
 
 	/**
-	 * 
-	 * @param output 
-	 * @param g
-	 * @param u1
-	 * @param u2
-	 * @param command
+	 * Helper method for parseQuery. Writes the results of the queries to the output file.
+	 * @param output initialized BufferedWriter for the output file
+	 * @param g initialized graph of edges and vertices
+	 * @param u1 one vertex used in commands
+	 * @param u2 another vertex used in commands
+	 * @param command command to execute
 	 */
 
 	private static void printResults(BufferedWriter output, Graph g, Vertex u1, Vertex u2, String command) {
 		final String commonInfluencers = "commonInfluencers";
 		final String numRetweets = "numRetweets";
+		
+		final String VERTEX_NOT_FOUND_ERROR = "ERROR: One or more vertices does not exist in the graph.";
+		final String INVALID_COMMAND_ERROR = "\tError: invalid command ";
+		final String PATH_NOT_FOUND_ERROR = "\tPath not found.";
+		
 		List<Vertex> allVertices = new ArrayList<Vertex>(g.getVertices());
 		
 		try {
@@ -181,7 +186,7 @@ public class TwitterAnalysis {
 			
 			//check if vertices exist in graph
 			if(!allVertices.contains(u1) || !allVertices.contains(u2) ){
-				output.write("ERROR: One or more vertices does not exist in the graph.");
+				output.write(VERTEX_NOT_FOUND_ERROR);
 				output.newLine();
 				output.write("</result>");
 				output.newLine();
@@ -203,7 +208,7 @@ public class TwitterAnalysis {
 				int distance = Algorithms.shortestDistance(g, u2, u1);
 				
 				if (distance == -1) {
-					output.write("\tPath not found.");
+					output.write(PATH_NOT_FOUND_ERROR);
 				} else {
 					//implicitly convert distance to string as printing out ints somehow didn't work
 					output.write(""+distance);
@@ -212,7 +217,7 @@ public class TwitterAnalysis {
 
 				output.newLine();
 			} else {
-				output.write("\tError: invalid command " + command);
+				output.write(INVALID_COMMAND_ERROR + command);
 				output.newLine();
 			}
 			output.write("</result>");

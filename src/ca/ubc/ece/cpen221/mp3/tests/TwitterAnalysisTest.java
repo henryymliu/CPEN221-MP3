@@ -9,15 +9,20 @@ import java.io.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import twitterAnalysis.TwitterAnalysis;
+
 public class TwitterAnalysisTest {
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
 
 	@Test
 	public void test() {
-		
+		String[] params = {"datasets/TestingQueries.txt", "testResults1.txt", "datasets/test1.txt"};
+		TwitterAnalysis.main(params);
+		try{
+		assertEquals(parseFile("expectedOut.txt"), parseFile("testResults1.txt"));
+		}
+		catch(IOException e){
+			fail("some files not found");
+		}
 	}
 	
 	public String parseFile(String file) throws IOException{
