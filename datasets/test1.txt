@@ -3,5 +3,8 @@ a -> c
 a -> d
 b -> c
 b -> f
+b -> a
 c -> e
 e -> a
+f -> d
+f -> h
