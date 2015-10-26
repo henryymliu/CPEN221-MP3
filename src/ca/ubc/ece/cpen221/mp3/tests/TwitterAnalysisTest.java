@@ -10,10 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 
-/*
- * 
- */
-
 import twitterAnalysis.TwitterAnalysis;
 
 

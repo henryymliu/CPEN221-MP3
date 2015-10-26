@@ -55,7 +55,9 @@ public class AdjacencyListGraph implements Graph {
 	 * iff v has no downstream neighbors.
 	 */
 	public List<Vertex> getDownstreamNeighbors(Vertex v){
-		
+		if(!listGraph.containsKey(v)){
+			return new LinkedList<Vertex>();
+		}
 		return new LinkedList<Vertex>(listGraph.get(v));
 	}
 
