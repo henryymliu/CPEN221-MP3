@@ -2,8 +2,10 @@ package ca.ubc.ece.cpen221.mp3.tests;
 
 import static org.junit.Assert.assertEquals;
 
-import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +20,10 @@ public class AlgorithmTest {
     AdjacencyMatrixGraph M1;
     AdjacencyListGraph G2;
     AdjacencyMatrixGraph M2;
+    AdjacencyListGraph G3;
+    AdjacencyMatrixGraph M3;
+    AdjacencyListGraph G4;
+    AdjacencyMatrixGraph M4;
 
     Vertex a = new Vertex("a");
     Vertex b = new Vertex("b");
@@ -115,6 +121,34 @@ public class AlgorithmTest {
         M2.addEdge(f, h);
         M2.addEdge(f, i);
         M2.addEdge(g, j);
+        
+        G3 = new AdjacencyListGraph();
+        G3.addVertex(a);
+        G3.addVertex(b);
+        G3.addVertex(c);
+        G3.addVertex(d);
+        G3.addVertex(e);
+        G3.addVertex(f);
+        G3.addVertex(g);
+        G3.addVertex(h);
+        G3.addVertex(i);
+        G3.addVertex(j);
+        
+        M3 = new AdjacencyMatrixGraph();
+        M3.addVertex(a);
+        M3.addVertex(b);
+        M3.addVertex(c);
+        M3.addVertex(d);
+        M3.addVertex(e);
+        M3.addVertex(f);
+        M3.addVertex(g);
+        M3.addVertex(h);
+        M3.addVertex(i);
+        M3.addVertex(j);
+        
+        G4 = new AdjacencyListGraph();
+        
+        M4 = new AdjacencyMatrixGraph();
     }
 
     @Test
@@ -144,24 +178,118 @@ public class AlgorithmTest {
 
     @Test
     public void testBreadthFirstSearch() {
-        HashSet<List<Vertex>> listBreadthFirstSearch = new HashSet<List<Vertex>>();
-        List<Vertex> arrayA = new ArrayList<Vertex>();
+        HashSet<List<Vertex>> listBreadthFirstSearch2 = new HashSet<List<Vertex>>();
+        HashSet<List<Vertex>> listBreadthFirstSearch3 = new HashSet<List<Vertex>>();
+        List<Vertex> arrayA2 = Arrays.asList(a,c,f,e,h,i);
+        List<Vertex> arrayB2 = Arrays.asList(b,c,e);
+        List<Vertex> arrayC2 = Arrays.asList(c,e);
+        List<Vertex> arrayD2 = Arrays.asList(d,c,e);
+        List<Vertex> arrayE2 = Arrays.asList(e);
+        List<Vertex> arrayF2 = Arrays.asList(f,h,i);
+        List<Vertex> arrayG2 = Arrays.asList(g,j);
+        List<Vertex> arrayH2 = Arrays.asList(h);
+        List<Vertex> arrayI2 = Arrays.asList(i);
+        List<Vertex> arrayJ2 = Arrays.asList(j);
+        listBreadthFirstSearch2.add(arrayA2);
+        listBreadthFirstSearch2.add(arrayB2);
+        listBreadthFirstSearch2.add(arrayC2);
+        listBreadthFirstSearch2.add(arrayD2);
+        listBreadthFirstSearch2.add(arrayE2);
+        listBreadthFirstSearch2.add(arrayF2);
+        listBreadthFirstSearch2.add(arrayG2);
+        listBreadthFirstSearch2.add(arrayH2);
+        listBreadthFirstSearch2.add(arrayI2);
+        listBreadthFirstSearch2.add(arrayJ2);
         
-        // assertEquals(new HashSet<List<Vertex>>(), Algorithms.breadthFirstSearch(G));
-
+        List<Vertex> arrayA3 = Arrays.asList(a);
+        List<Vertex> arrayB3 = Arrays.asList(b);
+        List<Vertex> arrayC3 = Arrays.asList(c);
+        List<Vertex> arrayD3 = Arrays.asList(d);
+        List<Vertex> arrayE3 = Arrays.asList(e);
+        List<Vertex> arrayF3 = Arrays.asList(f);
+        List<Vertex> arrayG3 = Arrays.asList(g);
+        List<Vertex> arrayH3 = Arrays.asList(h);
+        List<Vertex> arrayI3 = Arrays.asList(i);
+        List<Vertex> arrayJ3 = Arrays.asList(j);
+        listBreadthFirstSearch3.add(arrayA3);
+        listBreadthFirstSearch3.add(arrayB3);
+        listBreadthFirstSearch3.add(arrayC3);
+        listBreadthFirstSearch3.add(arrayD3);
+        listBreadthFirstSearch3.add(arrayE3);
+        listBreadthFirstSearch3.add(arrayF3);
+        listBreadthFirstSearch3.add(arrayG3);
+        listBreadthFirstSearch3.add(arrayH3);
+        listBreadthFirstSearch3.add(arrayI3);
+        listBreadthFirstSearch3.add(arrayJ3);
         
-        //assertEquals(new HashSet<List<Vertex>>(), Algorithms.breadthFirstSearch(M));
+        assertEquals(listBreadthFirstSearch2, Algorithms.breadthFirstSearch(G2));
+        assertEquals(listBreadthFirstSearch2, Algorithms.breadthFirstSearch(M2));
+        
+        assertEquals(listBreadthFirstSearch3, Algorithms.breadthFirstSearch(G3));
+        assertEquals(listBreadthFirstSearch3, Algorithms.breadthFirstSearch(M3));
+        
+        assertEquals(new HashSet<List<Vertex>>(), Algorithms.breadthFirstSearch(G4));
+        assertEquals(new HashSet<List<Vertex>>(), Algorithms.breadthFirstSearch(M4));
+        
         
         assertEquals(Algorithms.breadthFirstSearch(G2), Algorithms.breadthFirstSearch(M2));
     }
 
     @Test
     public void testDepthFirstSearch() {
-
-        // assertEquals(new HashSet<List<Vertex>>(), Algorithms.depthFirstSearch(G));
-
+        HashSet<List<Vertex>> listDepthFirstSearch2 = new HashSet<List<Vertex>>();
+        HashSet<List<Vertex>> listDepthFirstSearch3 = new HashSet<List<Vertex>>();
+        List<Vertex> arrayA2 = Arrays.asList(a,f,i,h,c,e);
+        List<Vertex> arrayB2 = Arrays.asList(b,c,e);
+        List<Vertex> arrayC2 = Arrays.asList(c,e);
+        List<Vertex> arrayD2 = Arrays.asList(d,c,e);
+        List<Vertex> arrayE2 = Arrays.asList(e);
+        List<Vertex> arrayF2 = Arrays.asList(f,i,h);
+        List<Vertex> arrayG2 = Arrays.asList(g,j);
+        List<Vertex> arrayH2 = Arrays.asList(h);
+        List<Vertex> arrayI2 = Arrays.asList(i);
+        List<Vertex> arrayJ2 = Arrays.asList(j);    
+        listDepthFirstSearch2.add(arrayA2);
+        listDepthFirstSearch2.add(arrayB2);
+        listDepthFirstSearch2.add(arrayC2);
+        listDepthFirstSearch2.add(arrayD2);
+        listDepthFirstSearch2.add(arrayE2);
+        listDepthFirstSearch2.add(arrayF2);
+        listDepthFirstSearch2.add(arrayG2);
+        listDepthFirstSearch2.add(arrayH2);
+        listDepthFirstSearch2.add(arrayI2);
+        listDepthFirstSearch2.add(arrayJ2);
         
-        // assertEquals(new HashSet<List<Vertex>>(), Algorithms.depthFirstSearch(M));
+        List<Vertex> arrayA3 = Arrays.asList(a);
+        List<Vertex> arrayB3 = Arrays.asList(b);
+        List<Vertex> arrayC3 = Arrays.asList(c);
+        List<Vertex> arrayD3 = Arrays.asList(d);
+        List<Vertex> arrayE3 = Arrays.asList(e);
+        List<Vertex> arrayF3 = Arrays.asList(f);
+        List<Vertex> arrayG3 = Arrays.asList(g);
+        List<Vertex> arrayH3 = Arrays.asList(h);
+        List<Vertex> arrayI3 = Arrays.asList(i);
+        List<Vertex> arrayJ3 = Arrays.asList(j);    
+        listDepthFirstSearch3.add(arrayA3);
+        listDepthFirstSearch3.add(arrayB3);
+        listDepthFirstSearch3.add(arrayC3);
+        listDepthFirstSearch3.add(arrayD3);
+        listDepthFirstSearch3.add(arrayE3);
+        listDepthFirstSearch3.add(arrayF3);
+        listDepthFirstSearch3.add(arrayG3);
+        listDepthFirstSearch3.add(arrayH3);
+        listDepthFirstSearch3.add(arrayI3);
+        listDepthFirstSearch3.add(arrayJ3);
+        
+        assertEquals(listDepthFirstSearch2, Algorithms.depthFirstSearch(G2));
+        assertEquals(listDepthFirstSearch2, Algorithms.depthFirstSearch(M2));
+        
+        assertEquals(listDepthFirstSearch3, Algorithms.depthFirstSearch(G3));
+        assertEquals(listDepthFirstSearch3, Algorithms.depthFirstSearch(M3));
+        
+        assertEquals(new HashSet<List<Vertex>>(), Algorithms.depthFirstSearch(G4));
+        assertEquals(new HashSet<List<Vertex>>(), Algorithms.depthFirstSearch(M4));
+        
         
         assertEquals(Algorithms.depthFirstSearch(G2), Algorithms.depthFirstSearch(M2));
     }
@@ -176,6 +304,8 @@ public class AlgorithmTest {
         assertEquals(new ArrayList<Vertex>(Arrays.asList(f)), Algorithms.commonUpstreamVertices(M2, h, i));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonUpstreamVertices(M2, b, c));
         
+        assertEquals(new ArrayList<Vertex>(), Algorithms.commonUpstreamVertices(M4, a, b));
+        assertEquals(new ArrayList<Vertex>(), Algorithms.commonUpstreamVertices(G4, a, b));
     }
     
     public void testCommonDownstreamVertices() {
@@ -186,6 +316,9 @@ public class AlgorithmTest {
         
         assertEquals(new ArrayList<Vertex>(Arrays.asList(a)), Algorithms.commonDownstreamVertices(M2, b, c));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonDownstreamVertices(M2, h, i));
+        
+        assertEquals(new ArrayList<Vertex>(), Algorithms.commonDownstreamVertices(M4, a, b));
+        assertEquals(new ArrayList<Vertex>(), Algorithms.commonDownstreamVertices(G4, a, b));
     }
 
 }
