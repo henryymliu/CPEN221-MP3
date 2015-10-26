@@ -56,11 +56,16 @@ public class TwitterAnalysis {
 		
 		long stopTime = System.currentTimeMillis();
 		//Algorithms.breadthFirstSearch(g);
-		System.out.println("Computation took: " + (stopTime - startTime) + " milliseconds.");
+		//System.out.println("Computation took: " + (stopTime - startTime) + " milliseconds.");
 		parseQuery(queryStream, outStream, g);
 
 	}
-
+	/**
+	 * Generates AdjacencyListGraph based on the values in the input file.
+	 * @requires twitterStream is properly initialized
+	 * @param twitterStream initialized input stream for reading twitter file
+	 * @return generated graph based on input file
+	 */
 	private static Graph readTwitterFile(FileInputStream twitterStream) {
 		final int U1_INDEX = 0;
 		final int U2_INDEX = 1;

@@ -11,27 +11,25 @@ import org.junit.Test;
 
 import twitterAnalysis.TwitterAnalysis;
 
-
 public class TwitterAnalysisTest {
 
 	@Test
 	public void test() {
-		String[] params = {"datasets/TestingQueries.txt", "testResults1.txt", "datasets/test1.txt"};
+		String[] params = { "datasets/TestingQueries.txt", "testResults1.txt", "datasets/test1.txt" };
 		TwitterAnalysis.main(params);
-		try{
-		assertEquals(parseFile("expectedTestQueries1.txt"), parseFile("testResults1.txt"));
-		}
-		catch(IOException e){
+		try {
+			assertEquals(parseFile("expectedTestQueries1.txt"), parseFile("testResults1.txt"));
+		} catch (IOException e) {
 			fail("some files not found");
 		}
 	}
-	
-	public String parseFile(String file) throws IOException{
-	
+
+	public String parseFile(String file) throws IOException {
+
 		BufferedReader queryReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 		StringBuffer toString = new StringBuffer();
 		String line;
-		while((line = queryReader.readLine()) != null){
+		while ((line = queryReader.readLine()) != null) {
 			toString.append(line);
 		}
 		queryReader.close();

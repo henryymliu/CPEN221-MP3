@@ -22,9 +22,9 @@ query: numRetweets a a
 2
 </result>
 
-query: numRetweets b h
+query: numRetweets h a
 <result>
-	Path not found.
+3
 </result>
 
 query: commonInfluencer a f
