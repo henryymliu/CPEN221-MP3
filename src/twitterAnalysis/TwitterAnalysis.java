@@ -111,6 +111,8 @@ public class TwitterAnalysis {
 			final int COMMAND_INDEX = 0;
 			final int U1_INDEX = 1;
 			final int U2_INDEX = 2;
+			
+			final String QUERY_ENDING = " ?";
 
 			Set<Set<String>> queries = new LinkedHashSet<Set<String>>();
 
@@ -137,7 +139,7 @@ public class TwitterAnalysis {
 				query.add(command);
 
 				// check if query ends with question mark (with leading space) and query is unique
-				if (line.endsWith(" ?") && !queries.contains(query)) {
+				if (line.endsWith(QUERY_ENDING) && !queries.contains(query)) {
 
 					queries.add(query);
 

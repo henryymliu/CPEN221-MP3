@@ -60,6 +60,7 @@ public class AdjacencyListGraph implements Graph {
 	 * iff v has no downstream neighbors.
 	 */
 	public List<Vertex> getDownstreamNeighbors(Vertex v){
+		
 		return new LinkedList<Vertex>(listGraph.get(v));
 	}
 
