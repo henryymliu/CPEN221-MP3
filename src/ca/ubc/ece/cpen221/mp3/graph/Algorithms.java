@@ -63,7 +63,7 @@ public class Algorithms {
     }
     
     /**
-     * Performs BFS starting from every vertex in a directed graph
+     * Performs BFS starting from every vertex in an unweighted directed graph
      * 
      * @param graph graph that already has vertices with edges
      * @return set of all BFS traversals beginning at each vertex

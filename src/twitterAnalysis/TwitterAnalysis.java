@@ -13,8 +13,14 @@ public class TwitterAnalysis {
 		FileInputStream twitterStream;
 
 		final int ARGS_SIZE = 2;
+<<<<<<< HEAD
 		final String twitterFile = "datasets/test1.txt";
 
+=======
+		final String twitterFile = "datasets/twitter.txt";
+		
+		//if less than 2 input arguments
+>>>>>>> 376de114a59bb2e838a6c534155c1261b9f19cc3
 		if (args.length < ARGS_SIZE) {
 			System.out.println("Not enough input arguments.");
 			return;
@@ -23,7 +29,8 @@ public class TwitterAnalysis {
 		String outFile = args[1];
 
 		try {
-
+			
+			//try to initialize fileinput/output streams
 			queryStream = new FileInputStream(queryFile);
 			outStream = new FileOutputStream(outFile);
 
@@ -33,9 +40,12 @@ public class TwitterAnalysis {
 			System.out.println("One or more files not found. Make sure the file name ends in .txt");
 			return;
 		}
+		//times just used to see how long it takes to generate graph
 		long startTime = System.currentTimeMillis();
 		Graph g = readTwitterFile(twitterStream);
+		
 		long stopTime = System.currentTimeMillis();
+		//Algorithms.breadthFirstSearch(g);
 		System.out.println("Computation took: " + (stopTime - startTime) + " milliseconds.");
 		parseQuery(queryStream, outStream, g);
 
@@ -47,8 +57,10 @@ public class TwitterAnalysis {
 			BufferedReader twitterReader = new BufferedReader(new InputStreamReader(twitterStream));
 			String line;
 			while ((line = twitterReader.readLine()) != null) {
-				//line.replaceAll("\\s+", "");
+				
+				//eliminate any unnecessary whitespace
 				String[] columns = line.trim().replaceAll("\\s+", "").split("->");
+				
 				// first column is user 1
 				// second column is user 2
 				Vertex u1 = new Vertex(columns[0]);
@@ -69,9 +81,18 @@ public class TwitterAnalysis {
 	/**
 	 * Reads query file and parses the queries.
 	 * 
+<<<<<<< HEAD
 	 * @param queryStream initialized FileInputStream for the query file
 	 * @param outStream initialized FileOutputStream for the output file
 	 * @param g initialized graph with vertices and edges
+=======
+	 * @requires querystream, outstream, are successfully initialized
+	 * @requires g to be already generated
+	 * @param queryStream file input stream of query file
+	 * @param outStream file output stream of output file
+	 * @param g
+	 * @effects writes results to output file
+>>>>>>> 376de114a59bb2e838a6c534155c1261b9f19cc3
 	 */
 	private static void parseQuery(FileInputStream queryStream, FileOutputStream outStream, Graph g) {
 
@@ -84,15 +105,18 @@ public class TwitterAnalysis {
 			String line;
 
 			while ((line = queryReader.readLine()) != null) {
+				
+				//each query set contains two user id strings and a command
+				//this also handles duplicate user ids with different commands
 				Set<String> query = new LinkedHashSet<String>();
 				
+				//a bit overkill, but eliminate any unnecessary whitespace if needed
 				String[] columns = line.trim().replaceAll("\\s+", " ").split(" ");
 		
 				// first column is query
 				// second column is user 1
 				// third column is user 2
-				// fourth column is question mark
-
+		
 				String command = columns[0];
 				String id1 = columns[1];
 				String id2 = columns[2];
@@ -100,8 +124,8 @@ public class TwitterAnalysis {
 				query.add(id2);
 				query.add(command);
 
-				// check if query ends with question mark and query is unique
-				if (line.endsWith("?") && !queries.contains(query)) {
+				// check if query ends with question mark (with leading space) and query is unique
+				if (line.endsWith(" ?") && !queries.contains(query)) {
 
 					queries.add(query);
 
@@ -122,6 +146,7 @@ public class TwitterAnalysis {
 		}
 
 	}
+<<<<<<< HEAD
 	/**
 	 * 
 	 * @param output 
@@ -130,6 +155,9 @@ public class TwitterAnalysis {
 	 * @param u2
 	 * @param command
 	 */
+=======
+	
+>>>>>>> 376de114a59bb2e838a6c534155c1261b9f19cc3
 	private static void printResults(BufferedWriter output, Graph g, Vertex u1, Vertex u2, String command) {
 		final String commonInfluencers = "commonInfluencers";
 		final String numRetweets = "numRetweets";
@@ -161,11 +189,13 @@ public class TwitterAnalysis {
 
 			// if query is numRetweets
 			else if (command.equals(numRetweets)) {
-				int distance = Algorithms.shortestDistance(g, u1, u2);
+				//note switch in u1 and u2; this is because tweets go upstream
+				int distance = Algorithms.shortestDistance(g, u2, u1);
 				
 				if (distance == -1) {
 					output.write("\tPath not found.");
 				} else {
+					//implicitly convert distance to string as printing out ints somehow didn't work
 					output.write(""+distance);
 					//System.out.println(distance);
 				}
