@@ -13,11 +13,6 @@ public class AdjacencyListGraph implements Graph {
 		listGraph= new LinkedHashMap<Vertex, Set<Vertex>>();
 	}
 	
-	/*
-	public AdjacencyListGraph(List<Vertex> list){
-		listGraph= new HashMap<Vertex, ArrayList<Vertex>>(list);
-	}
-	*/
 	/**
 	 * Adds a vertex to the graph.
 	 *

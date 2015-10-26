@@ -44,7 +44,7 @@ public class Algorithms {
                 
                 //System.out.println(nextVertex);
                 if (nextVertex.equals(b)) {
-                    //System.out.println("1");
+                    //System.out.println(depth);
                     return depth;
                 }
                 
@@ -57,7 +57,7 @@ public class Algorithms {
             }
           
             depth++;
-           // System.out.println("6");
+           // System.out.println(depth);
         }
         return -1;
     }
