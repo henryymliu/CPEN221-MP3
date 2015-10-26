@@ -1,0 +1,5 @@
+query: commonInfluencers f b
+<result>
+ERROR: One or more vertices does not exist in the graph.
+</result>
+

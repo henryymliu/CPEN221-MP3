@@ -1,0 +1,148 @@
+query: commonInfluencers 77514130 37722200
+<result>
+	71027322
+	26091472
+	17503591
+	31019764
+	24783254
+</result>
+
+query: commonInfluencers 35831627 37722200
+<result>
+	71027322
+	26091472
+	17503591
+	31019764
+	268107349
+	24783254
+</result>
+
+query: commonInfluencers 25407657 37722200
+<result>
+	26091472
+	17503591
+</result>
+
+query: commonInfluencers 18085476 37722200
+<result>
+	17968886
+	26091472
+	30070014
+	17503591
+	24783254
+</result>
+
+query: commonInfluencers 17722816 14536491
+<result>
+	26033920
+	119770620
+	153066964
+	46130249
+	28933226
+	16824850
+	21851890
+	19519349
+	22679419
+	14935647
+	105004950
+	14180231
+	14389837
+	46537966
+	25952851
+	470450912
+	21195122
+	23404076
+	162770758
+	4113261
+	291468308
+	9431932
+	14885693
+	129267848
+	18420291
+	59179219
+	41839767
+	96907622
+	206505465
+	116941776
+	117187783
+	6478202
+	173371234
+	108746742
+	55443010
+	122794938
+	261001122
+	36198161
+	18581803
+	94454911
+</result>
+
+query: commonInfluences 313519972 14536491
+<result>
+	Error: invalid command commonInfluences
+</result>
+
+query: commonInfluences 77514130 71027322
+<result>
+	Error: invalid command commonInfluences
+</result>
+
+query: commonInfluences 77514130 60918510
+<result>
+	Error: invalid command commonInfluences
+</result>
+
+query: commonInfluences 77514130 26091472
+<result>
+	Error: invalid command commonInfluences
+</result>
+
+query: numRetweets 44962272 18720702
+<result>
+1
+</result>
+
+query: numRetweets 44962272 20696985
+<result>
+1
+</result>
+
+query: numRetweets 44962272 38815826
+<result>
+1
+</result>
+
+query: numRetweets 56834816 44962272
+<result>
+1
+</result>
+
+query: numRetweets 21867449 44962272
+<result>
+1
+</result>
+
+query: numRetweets 61428016 21867449
+<result>
+1
+</result>
+
+query: numRetweets 56834816 21867449
+<result>
+1
+</result>
+
+query: numRetweets 32959826 56834816
+<result>
+1
+</result>
+
+query: numRetweets 294404979 56834816
+<result>
+1
+</result>
+
+query: numRetweets 35420362 56834816
+<result>
+1
+</result>
+
