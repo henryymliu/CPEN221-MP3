@@ -13,8 +13,13 @@ public class TwitterAnalysis {
 		FileInputStream twitterStream;
 
 		final int ARGS_SIZE = 2;
+		final int ARGS_SIZE_DEBUG = 3;
+		
+		final int QUERY_INDEX = 0;
+		final int OUT_INDEX = 1;
+		final int DEBUG_INDEX = 2;
 
-		final String twitterFile = "datasets/twitter.txt";
+		final String twitterFile;
 		
 		//if less than 2 input arguments
 
@@ -22,8 +27,16 @@ public class TwitterAnalysis {
 			System.out.println("Not enough input arguments.");
 			return;
 		}
-		String queryFile = args[0];
-		String outFile = args[1];
+		String queryFile = args[QUERY_INDEX];
+		String outFile = args[OUT_INDEX];
+		
+		//can specify separate data file for graph
+		if(args.length  == ARGS_SIZE_DEBUG){
+			twitterFile = args[DEBUG_INDEX];
+		}
+		else{
+			twitterFile = "datasets/twitter.txt";
+		}
 
 		try {
 			
@@ -49,6 +62,8 @@ public class TwitterAnalysis {
 	}
 
 	private static Graph readTwitterFile(FileInputStream twitterStream) {
+		final int U1_INDEX = 0;
+		final int U2_INDEX = 1;
 		try {
 			Graph g = new AdjacencyListGraph();
 			BufferedReader twitterReader = new BufferedReader(new InputStreamReader(twitterStream));
@@ -60,8 +75,8 @@ public class TwitterAnalysis {
 				
 				// first column is user 1
 				// second column is user 2
-				Vertex u1 = new Vertex(columns[0]);
-				Vertex u2 = new Vertex(columns[1]);
+				Vertex u1 = new Vertex(columns[U1_INDEX]);
+				Vertex u2 = new Vertex(columns[U2_INDEX]);
 				//System.out.println(columns[0]+","+columns[1]);
 				g.addVertex(u1);
 				g.addVertex(u2);
@@ -92,6 +107,10 @@ public class TwitterAnalysis {
 		try {
 			BufferedWriter output = new BufferedWriter(new OutputStreamWriter(outStream));
 			BufferedReader queryReader = new BufferedReader(new InputStreamReader(queryStream));
+			
+			final int COMMAND_INDEX = 0;
+			final int U1_INDEX = 1;
+			final int U2_INDEX = 2;
 
 			Set<Set<String>> queries = new LinkedHashSet<Set<String>>();
 
@@ -110,9 +129,9 @@ public class TwitterAnalysis {
 				// second column is user 1
 				// third column is user 2
 		
-				String command = columns[0];
-				String id1 = columns[1];
-				String id2 = columns[2];
+				String command = columns[COMMAND_INDEX];
+				String id1 = columns[U1_INDEX];
+				String id2 = columns[U2_INDEX];
 				query.add(id1);
 				query.add(id2);
 				query.add(command);
