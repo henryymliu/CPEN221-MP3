@@ -1,9 +1,0 @@
-commonInfluencers a b ?
-numRetweet a f ?
-numRetweets a f ?
- numRetweets a f ?
-commonInfluencers a e ?
-numRetweets a a ?
-numRetweets b h ?
-commonInfluencer a f ?
-commonInfluencers d f ?
