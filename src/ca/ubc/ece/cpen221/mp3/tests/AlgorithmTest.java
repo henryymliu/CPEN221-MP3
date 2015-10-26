@@ -244,7 +244,7 @@ public class AlgorithmTest {
      */
     @Test
     public void testDepthFirstSearch() {
-        // initialize hashset of lists for testing
+        // initialize HashSet of lists for testing
         HashSet<List<Vertex>> listDepthFirstSearch2 = new HashSet<List<Vertex>>();
         HashSet<List<Vertex>> listDepthFirstSearch3 = new HashSet<List<Vertex>>();
 
