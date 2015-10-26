@@ -73,9 +73,10 @@ public class AdjacencyListGraph implements Graph {
 	 */
 	public List<Vertex> getUpstreamNeighbors(Vertex v){
 		List<Vertex> upstreamN = new LinkedList<Vertex>();
-		for(Vertex v1:listGraph.keySet()){
-			if(listGraph.get(v1).contains(v)){
-				upstreamN.add(v1);
+		// iterate through all vertices in listGraph
+		for(Vertex vertex:listGraph.keySet()){
+			if(listGraph.get(vertex).contains(v)){
+				upstreamN.add(vertex);
 			}
 		}
 		return upstreamN;

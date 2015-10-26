@@ -85,12 +85,12 @@ public class Algorithms {
         Set<List<Vertex>> paths = new HashSet<List<Vertex>>();
 
         // iterate through all vertices
-        for (Vertex nextV : allVertices) {
+        for (Vertex nextVertex : allVertices) {
             Queue<Vertex> vertexQueue = new LinkedList<Vertex>();
             ArrayList<Vertex> traversedVertices = new ArrayList<Vertex>();
 
             // enqueue first vertex
-            Vertex currentVertex = nextV;
+            Vertex currentVertex = nextVertex;
             vertexQueue.add(currentVertex);
 
             while (!vertexQueue.isEmpty()) {
@@ -127,11 +127,11 @@ public class Algorithms {
         Stack<Vertex> vertexStack = new Stack<Vertex>();
 
         // iterate through all the vertices
-        for (Vertex nextV : vertices) {
+        for (Vertex nextVertex : vertices) {
 
             List<Vertex> traversedPath = new LinkedList<Vertex>();
 
-            vertexStack.push(nextV); // starting value for new path
+            vertexStack.push(nextVertex); // starting value for new path
 
             /**
              * this is the actual DFS algorithm (non-recursive)
@@ -173,10 +173,10 @@ public class Algorithms {
         ArrayList<Vertex> edgeVertex = new ArrayList<Vertex>();
 
         // iterate through all upstream vertices of both a and b
-        for (Vertex i : vertexAUpstream) {
-            for (Vertex k : vertexBUpstream) {
-                if (i.equals(k)) {
-                    edgeVertex.add(i);
+        for (Vertex vertex1 : vertexAUpstream) {
+            for (Vertex vertex2 : vertexBUpstream) {
+                if (vertex1.equals(vertex2)) {
+                    edgeVertex.add(vertex1);
                 }
             }
         }
@@ -203,10 +203,10 @@ public class Algorithms {
         ArrayList<Vertex> edgeVertex = new ArrayList<Vertex>();
 
         // iterate through all downstream vertices of both a and b
-        for (Vertex i : vertexADownstream) {
-            for (Vertex k : vertexBDownstream) {
-                if (i.equals(k)) {
-                    edgeVertex.add(i);
+        for (Vertex vertex1 : vertexADownstream) {
+            for (Vertex vertex2 : vertexBDownstream) {
+                if (vertex1.equals(vertex2)) {
+                    edgeVertex.add(vertex1);
                 }
             }
         }
