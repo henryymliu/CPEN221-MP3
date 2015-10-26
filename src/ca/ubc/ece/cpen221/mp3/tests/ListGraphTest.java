@@ -1,9 +1,7 @@
-/**
- * 
- */
 package ca.ubc.ece.cpen221.mp3.tests;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import static org.junit.Assert.*;
 
@@ -12,12 +10,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ca.ubc.ece.cpen221.mp3.graph.AdjacencyListGraph;
+import ca.ubc.ece.cpen221.mp3.graph.AdjacencyMatrixGraph;
 import ca.ubc.ece.cpen221.mp3.staff.Vertex;
 
-/**
- * @author Henry Liu
- *
- */
 public class ListGraphTest {
     AdjacencyListGraph G;
     Vertex a = new Vertex("a");
@@ -70,5 +65,25 @@ public class ListGraphTest {
         assertEquals(testUpstreamA, G.getUpstreamNeighbors(a));
 
     }
+    
+    @Test
+    public void testEdgeExists() {
+        G.addEdge(a, b);
+        G.addEdge(a, c);
+        G.addEdge(a, e);
+        G.addEdge(e, a);
+        G.addEdge(e, d);
+        G.addEdge(d, a);
+        
+        assertTrue(G.edgeExists(a, b));
+        assertFalse(G.edgeExists(a, d));
+    }
 
+    public void testGetVertices() {
+        List<Vertex> testGetVertices = new ArrayList<Vertex>(Arrays.asList(a,b,c,d,e,f));
+        assertEquals(testGetVertices,G.getVertices());
+        
+        AdjacencyMatrixGraph empty;
+        assertEquals(0,empty.getVertices());
+    }
 }
