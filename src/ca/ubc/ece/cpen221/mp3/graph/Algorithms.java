@@ -68,7 +68,7 @@ public class Algorithms {
      * @param graph graph that already has vertices with edges
      * @return set of all BFS traversals beginning at each vertex
      */
-    public static HashSet<List<Vertex>> breadthFirstSearch(Graph graph) {
+    public static Set<List<Vertex>> breadthFirstSearch(Graph graph) {
         List<Vertex> allVertices = graph.getVertices();
         Set<List<Vertex>> paths = new HashSet<List<Vertex>>();
         
