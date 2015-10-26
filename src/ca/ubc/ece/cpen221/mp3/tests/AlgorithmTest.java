@@ -38,9 +38,9 @@ public class AlgorithmTest {
     Vertex k = new Vertex("k");
 
     /*
-     * Initializes graphs that will be used in the test.
-     * L1 and M1 will be used for testing ShortestDistance()
-     * L2, L3, L4, M2, M3, M4 will be used to test BFS, DFS, Upstream, and Downstream methods
+     * Initializes graphs that will be used in the test. L1 and M1 will be used
+     * for testing ShortestDistance() L2, L3, L4, M2, M3, M4 will be used to
+     * test BFS, DFS, Upstream, and Downstream methods
      */
     @Before
     public void setupGraph() {
@@ -87,7 +87,7 @@ public class AlgorithmTest {
         M1.addEdge(i, j);
         M1.addEdge(j, e);
         M1.addEdge(j, a);
-        
+
         L2 = new AdjacencyListGraph();
         L2.addVertex(a);
         L2.addVertex(b);
@@ -112,7 +112,7 @@ public class AlgorithmTest {
         L2.addEdge(f, a);
         L2.addEdge(h, g);
         L2.addEdge(j, a);
-        
+
         M2 = new AdjacencyMatrixGraph();
         M2.addVertex(a);
         M2.addVertex(b);
@@ -137,7 +137,7 @@ public class AlgorithmTest {
         M2.addEdge(f, a);
         M2.addEdge(h, g);
         M2.addEdge(j, a);
-        
+
         // list and matrix with no edges
         L3 = new AdjacencyListGraph();
         L3.addVertex(a);
@@ -145,25 +145,25 @@ public class AlgorithmTest {
         L3.addVertex(c);
         L3.addVertex(d);
 
-        
         M3 = new AdjacencyMatrixGraph();
         M3.addVertex(a);
         M3.addVertex(b);
         M3.addVertex(c);
         M3.addVertex(d);
 
-        
         // empty list and matrix
         L4 = new AdjacencyListGraph();
-        
+
         M4 = new AdjacencyMatrixGraph();
     }
 
+    /*
+     * Tests shortestDistance method
+     */
     @Test
     public void testShortestDistance() {
 
         // for AdjacencyListGraph
-
         assertEquals((Algorithms.shortestDistance(L1, a, e)), 3);
         assertEquals((Algorithms.shortestDistance(L1, a, f)), 3);
         assertEquals((Algorithms.shortestDistance(L1, a, a)), 1);
@@ -173,7 +173,6 @@ public class AlgorithmTest {
         assertEquals((Algorithms.shortestDistance(L1, j, j)), -1);
 
         // for AdjacencyMatrixGraph
-
         assertEquals((Algorithms.shortestDistance(M1, a, e)), 3);
         assertEquals((Algorithms.shortestDistance(M1, a, f)), 3);
         assertEquals((Algorithms.shortestDistance(M1, a, a)), 1);
@@ -181,14 +180,17 @@ public class AlgorithmTest {
         assertEquals((Algorithms.shortestDistance(M1, a, j)), -1);
         assertEquals((Algorithms.shortestDistance(M1, e, d)), -1);
         assertEquals((Algorithms.shortestDistance(M1, j, j)), -1);
-        
     }
 
+    /*
+     * Tests breadthFirstSearch method
+     */
     @Test
     public void testBreadthFirstSearch() {
-        // initialize hashset of lists for testing
+        // initialize HashSet of lists for testing
         HashSet<List<Vertex>> listBreadthFirstSearch2 = new HashSet<List<Vertex>>();
         HashSet<List<Vertex>> listBreadthFirstSearch3 = new HashSet<List<Vertex>>();
+
         List<Vertex> arrayA2 = Arrays.asList(a, b, c, d, f, i);
         List<Vertex> arrayB2 = Arrays.asList(b);
         List<Vertex> arrayC2 = Arrays.asList(c, d, f, i, b, a);
@@ -211,8 +213,7 @@ public class AlgorithmTest {
         listBreadthFirstSearch2.add(arrayI2);
         listBreadthFirstSearch2.add(arrayJ2);
         listBreadthFirstSearch2.add(arrayK2);
-        
-        
+
         List<Vertex> arrayA3 = Arrays.asList(a);
         List<Vertex> arrayB3 = Arrays.asList(b);
         List<Vertex> arrayC3 = Arrays.asList(c);
@@ -222,28 +223,31 @@ public class AlgorithmTest {
         listBreadthFirstSearch3.add(arrayC3);
         listBreadthFirstSearch3.add(arrayD3);
 
-        
         // test using L2 and M2 (not empty and containing edges)
         assertEquals(listBreadthFirstSearch2, Algorithms.breadthFirstSearch(L2));
         assertEquals(listBreadthFirstSearch2, Algorithms.breadthFirstSearch(M2));
-        
+
         // test using L3 and M3 (not empty and not containing edges)
         assertEquals(listBreadthFirstSearch3, Algorithms.breadthFirstSearch(L3));
         assertEquals(listBreadthFirstSearch3, Algorithms.breadthFirstSearch(M3));
-        
+
         // test using L4 and M4 (empty)
         assertEquals(new HashSet<List<Vertex>>(), Algorithms.breadthFirstSearch(L4));
         assertEquals(new HashSet<List<Vertex>>(), Algorithms.breadthFirstSearch(M4));
-        
+
         // test for consistency between list and graph implementations
         assertEquals(Algorithms.breadthFirstSearch(L2), Algorithms.breadthFirstSearch(M2));
     }
 
+    /*
+     * Tests depthFirstSearch method
+     */
     @Test
     public void testDepthFirstSearch() {
         // initialize hashset of lists for testing
         HashSet<List<Vertex>> listDepthFirstSearch2 = new HashSet<List<Vertex>>();
         HashSet<List<Vertex>> listDepthFirstSearch3 = new HashSet<List<Vertex>>();
+
         List<Vertex> arrayA2 = Arrays.asList(a, c, i, f, d, b);
         List<Vertex> arrayB2 = Arrays.asList(b);
         List<Vertex> arrayC2 = Arrays.asList(c, i, f, a, b, d);
@@ -253,7 +257,7 @@ public class AlgorithmTest {
         List<Vertex> arrayG2 = Arrays.asList(g);
         List<Vertex> arrayH2 = Arrays.asList(h, g);
         List<Vertex> arrayI2 = Arrays.asList(i);
-        List<Vertex> arrayJ2 = Arrays.asList(j, a, c, i, f, d, b); 
+        List<Vertex> arrayJ2 = Arrays.asList(j, a, c, i, f, d, b);
         List<Vertex> arrayK2 = Arrays.asList(k);
         listDepthFirstSearch2.add(arrayA2);
         listDepthFirstSearch2.add(arrayB2);
@@ -266,37 +270,38 @@ public class AlgorithmTest {
         listDepthFirstSearch2.add(arrayI2);
         listDepthFirstSearch2.add(arrayJ2);
         listDepthFirstSearch2.add(arrayK2);
-        
+
         List<Vertex> arrayA3 = Arrays.asList(a);
         List<Vertex> arrayB3 = Arrays.asList(b);
         List<Vertex> arrayC3 = Arrays.asList(c);
         List<Vertex> arrayD3 = Arrays.asList(d);
-
         listDepthFirstSearch3.add(arrayA3);
         listDepthFirstSearch3.add(arrayB3);
         listDepthFirstSearch3.add(arrayC3);
         listDepthFirstSearch3.add(arrayD3);
 
-        
         // test using L2 and M2 (not empty and containing edges)
         assertEquals(listDepthFirstSearch2, Algorithms.depthFirstSearch(L2));
         assertEquals(listDepthFirstSearch2, Algorithms.depthFirstSearch(M2));
-        
+
         // test using L3 and M3 (not empty and not containing edges)
         assertEquals(listDepthFirstSearch3, Algorithms.depthFirstSearch(L3));
         assertEquals(listDepthFirstSearch3, Algorithms.depthFirstSearch(M3));
-        
+
         // test using L4 and M4 (empty)
         assertEquals(new HashSet<List<Vertex>>(), Algorithms.depthFirstSearch(L4));
         assertEquals(new HashSet<List<Vertex>>(), Algorithms.depthFirstSearch(M4));
-        
+
         // test for consistency between list and graph implementations
         assertEquals(Algorithms.depthFirstSearch(L2), Algorithms.depthFirstSearch(M2));
     }
 
+    /*
+     * Tests commonUpstreamVertices method
+     */
     @Test
     public void testCommonUpstreamVertices() {
-        
+
         // test using L2 and M2 (not empty and containing edges)
         assertEquals(new ArrayList<Vertex>(Arrays.asList(a)), Algorithms.commonUpstreamVertices(L2, b, c));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonUpstreamVertices(L2, c, d));
@@ -304,23 +309,26 @@ public class AlgorithmTest {
         // test using L3 and M3 (not empty and not containing edges)
         assertEquals(new ArrayList<Vertex>(Arrays.asList(a)), Algorithms.commonUpstreamVertices(M2, b, c));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonUpstreamVertices(M2, c, d));
-        
+
         // test using L4 and M4 (empty)
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonUpstreamVertices(M4, a, b));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonUpstreamVertices(L4, a, b));
     }
-    
+
+    /*
+     * Tests commonDownstreamVertices method
+     */
     @Test
     public void testCommonDownstreamVertices() {
-        
+
         // test using L2 and M2 (not empty and containing edges)
         assertEquals(new ArrayList<Vertex>(Arrays.asList(b)), Algorithms.commonDownstreamVertices(L2, a, d));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonDownstreamVertices(L2, a, b));
-        
+
         // test using L3 and M3 (not empty and not containing edges)
         assertEquals(new ArrayList<Vertex>(Arrays.asList(b)), Algorithms.commonDownstreamVertices(M2, a, d));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonDownstreamVertices(M2, a, b));
-        
+
         // test using L4 and M4 (empty)
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonDownstreamVertices(M4, a, b));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonDownstreamVertices(L4, a, b));

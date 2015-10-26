@@ -22,68 +22,73 @@ public class ListGraphTest {
     Vertex e = new Vertex("e");
     Vertex f = new Vertex("f");
 
+    /*
+     * Initialize graph that will be used in the test and tests addVertex and
+     * addEdge methods
+     */
     @Before
     public void setupGraph() {
         G = new AdjacencyListGraph();
+        // tests addVertex
         G.addVertex(a);
         G.addVertex(b);
         G.addVertex(c);
         G.addVertex(d);
         G.addVertex(e);
         G.addVertex(f);
-    }
-
-    @Test
-    public void testAddEdge() {
+        // tests addEdge
         G.addEdge(a, b);
         G.addEdge(a, c);
         G.addEdge(a, e);
         G.addEdge(e, a);
         G.addEdge(e, d);
         G.addEdge(d, a);
+    }
+
+    /*
+     * Tests getDownstreamNeighbors method
+     */
+    @Test
+    public void testDownstream() {
         List<Vertex> testDownstreamA = new ArrayList<Vertex>();
         testDownstreamA.add(b);
         testDownstreamA.add(c);
         testDownstreamA.add(e);
 
         assertEquals(testDownstreamA, G.getDownstreamNeighbors(a));
-
     }
 
+    /*
+     * Tests getUpstreamNeighbors method
+     */
     @Test
     public void testUpstream() {
-        G.addEdge(a, b);
-        G.addEdge(a, c);
-        G.addEdge(a, e);
-        G.addEdge(e, a);
-        G.addEdge(e, d);
-        G.addEdge(d, a);
         List<Vertex> testUpstreamA = new ArrayList<Vertex>();
         testUpstreamA.add(d);
         testUpstreamA.add(e);
 
         assertEquals(testUpstreamA, G.getUpstreamNeighbors(a));
-
     }
-    
+
+    /*
+     * Tests edgeExists method
+     */
     @Test
     public void testEdgeExists() {
-        G.addEdge(a, b);
-        G.addEdge(a, c);
-        G.addEdge(a, e);
-        G.addEdge(e, a);
-        G.addEdge(e, d);
-        G.addEdge(d, a);
-        
+
         assertTrue(G.edgeExists(a, b));
         assertFalse(G.edgeExists(a, d));
     }
 
+    /*
+     * Tests getVertices method
+     */
+    @Test
     public void testGetVertices() {
-        List<Vertex> testGetVertices = new ArrayList<Vertex>(Arrays.asList(a,b,c,d,e,f));
-        assertEquals(testGetVertices,G.getVertices());
-        
+        List<Vertex> testGetVertices = new ArrayList<Vertex>(Arrays.asList(a, b, c, d, e, f));
+        assertEquals(testGetVertices, G.getVertices());
+
         Graph empty = new AdjacencyListGraph();
-        assertEquals(0,empty.getVertices());
+        assertEquals(new ArrayList<Vertex>(), empty.getVertices());
     }
 }

@@ -20,78 +20,71 @@ public class MatrixGraphTest {
     Vertex e = new Vertex("e");
     Vertex f = new Vertex("f");
 
+    /*
+     * Initialize graph that will be used in the test and tests addVertex and
+     * addEdge methods
+     */
     @Before
-    public void setupGraph() {
+    public void setupGraphAndAddTest() {
         G = new AdjacencyMatrixGraph();
+        // tests addVertex()
         G.addVertex(a);
         G.addVertex(b);
         G.addVertex(c);
         G.addVertex(d);
         G.addVertex(e);
         G.addVertex(f);
-    }
-
-    @Test
-    public void test() {
-
-        G.addEdge(a, b);
-        List<Vertex> testDownstream = new ArrayList<Vertex>();
-        testDownstream.add(b);
-
-        assertEquals(testDownstream, G.getDownstreamNeighbors(a));
-    }
-
-    @Test
-    public void testAddEdge() {
+        // tests addEdge()
         G.addEdge(a, b);
         G.addEdge(a, c);
         G.addEdge(a, e);
         G.addEdge(e, a);
         G.addEdge(e, d);
         G.addEdge(d, a);
+    }
+
+    /*
+     * Tests getDownstreamNeighbors method
+     */
+    @Test
+    public void testDownstream() {
         List<Vertex> testDownstreamA = new ArrayList<Vertex>();
         testDownstreamA.add(b);
         testDownstreamA.add(c);
         testDownstreamA.add(e);
 
         assertEquals(testDownstreamA, G.getDownstreamNeighbors(a));
-
     }
 
+    /*
+     * Tests getUpstreamNeighbors method
+     */
     @Test
     public void testUpstream() {
-        G.addEdge(a, b);
-        G.addEdge(a, c);
-        G.addEdge(a, e);
-        G.addEdge(e, a);
-        G.addEdge(e, d);
-        G.addEdge(d, a);
         List<Vertex> testUpstreamA = new ArrayList<Vertex>();
         testUpstreamA.add(d);
         testUpstreamA.add(e);
 
         assertEquals(testUpstreamA, G.getUpstreamNeighbors(a));
-
     }
 
+    /*
+     * Tests edgeExists method
+     */
     @Test
     public void testEdgeExists() {
-        G.addEdge(a, b);
-        G.addEdge(a, c);
-        G.addEdge(a, e);
-        G.addEdge(e, a);
-        G.addEdge(e, d);
-        G.addEdge(d, a);
-        
         assertTrue(G.edgeExists(a, b));
         assertFalse(G.edgeExists(a, d));
     }
-    
+
+    /*
+     * Tests getVertices method
+     */
     public void testGetVertices() {
-        List<Vertex> testGetVertices = new ArrayList<Vertex>(Arrays.asList(a,b,c,d,e,f));
-        assertEquals(testGetVertices,G.getVertices());
-        
+        List<Vertex> testGetVertices = new ArrayList<Vertex>(Arrays.asList(a, b, c, d, e, f));
+        assertEquals(testGetVertices, G.getVertices());
+
         Graph empty = new AdjacencyMatrixGraph();
-        assertEquals(0,empty.getVertices());
+        assertEquals(0, empty.getVertices());
     }
 }
