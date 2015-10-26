@@ -297,13 +297,15 @@ public class AlgorithmTest {
     @Test
     public void testCommonUpstreamVertices() {
         
+        // test using L2 and M2 (not empty and containing edges)
         assertEquals(new ArrayList<Vertex>(Arrays.asList(a)), Algorithms.commonUpstreamVertices(L2, b, c));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonUpstreamVertices(L2, c, d));
 
-        
+        // test using L3 and M3 (not empty and not containing edges)
         assertEquals(new ArrayList<Vertex>(Arrays.asList(a)), Algorithms.commonUpstreamVertices(M2, b, c));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonUpstreamVertices(M2, c, d));
         
+        // test using L4 and M4 (empty)
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonUpstreamVertices(M4, a, b));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonUpstreamVertices(L4, a, b));
     }
@@ -311,13 +313,15 @@ public class AlgorithmTest {
     @Test
     public void testCommonDownstreamVertices() {
         
+        // test using L2 and M2 (not empty and containing edges)
         assertEquals(new ArrayList<Vertex>(Arrays.asList(b)), Algorithms.commonDownstreamVertices(L2, a, d));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonDownstreamVertices(L2, a, b));
         
-        
+        // test using L3 and M3 (not empty and not containing edges)
         assertEquals(new ArrayList<Vertex>(Arrays.asList(b)), Algorithms.commonDownstreamVertices(M2, a, d));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonDownstreamVertices(M2, a, b));
         
+        // test using L4 and M4 (empty)
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonDownstreamVertices(M4, a, b));
         assertEquals(new ArrayList<Vertex>(), Algorithms.commonDownstreamVertices(L4, a, b));
     }
