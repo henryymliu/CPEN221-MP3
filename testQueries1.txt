@@ -1,1 +1,38 @@
-commonInfluencers f b ?
+query: commonInfluencers a b
+<result>
+	c
+</result>
+
+query: numRetweet a f
+<result>
+	Error: invalid command numRetweet
+</result>
+
+query: numRetweets a f
+<result>
+	Path not found.
+</result>
+
+query: commonInfluencers a e
+<result>
+</result>
+
+query: numRetweets a a
+<result>
+2
+</result>
+
+query: numRetweets b h
+<result>
+	Path not found.
+</result>
+
+query: commonInfluencer a f
+<result>
+	Error: invalid command commonInfluencer
+</result>
+
+query: commonInfluencers d f
+<result>
+</result>
+
